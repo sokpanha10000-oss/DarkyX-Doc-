@@ -49,9 +49,11 @@
 
           <div class="nav-label">CORE</div>
           <a href="#window" data-nav>CreateWindow</a>
+          <a href="#window-full-form" data-nav>Window Full Form</a>
           <a href="#tag" data-nav>Tags</a>
           <a href="#tabs" data-nav>Tabs</a>
           <a href="#sections" data-nav>Sections</a>
+          <a href="#groups" data-nav>Groups</a>
 
           <div class="nav-label">ELEMENTS</div>
           <a href="#button" data-nav>Button</a>
@@ -148,10 +150,14 @@
       </section>
 
       <section class="section" id="window">
-        <div class="section-heading reveal"><span class="section-number">05</span><div><h2>CreateWindow</h2><p>Create the single main DarkyX window. This page is intentionally separate from Quick Start.</p></div></div>
-        <div class="window-cta reveal"><div><b>Single Window</b><span>Use the returned Window object to create the rest of your interface.</span></div><a href="#tabs" class="mini-btn" data-route-link>Next: CreateTab →</a></div>
+        <div class="section-heading reveal"><span class="section-number">05</span><div><h2>CreateWindow</h2><p>Create the single main DarkyX window. This page contains the clean starter form only.</p></div></div>
+        <div class="window-top-tabs reveal">
+          <a class="window-top-tab active" href="#window" data-route-link>Single Window</a>
+          <a class="window-top-tab" href="#window-full-form" data-route-link>Full Form</a>
+        </div>
+        <div class="window-cta reveal"><div><b>Single Window</b><span>Start with the essential settings, then open Full Form for every window option shown in this documentation.</span></div><a href="#window-full-form" class="mini-btn" data-route-link>Next: Full Form →</a></div>
         <div class="code-card reveal">
-          <div class="code-head"><span>CreateWindow Usage</span><button class="copy-btn" data-target="windowUsageCode">Copy</button></div>
+          <div class="code-head"><span>Single Window</span><button class="copy-btn" data-target="windowUsageCode" aria-label="Copy single window code" title="Copy single window code"></button></div>
           <pre id="windowUsageCode"><code>local window = DarkyX:CreateWindow({
     Title = "DarkyX Hub",
     subtitle = "DarkyX",
@@ -168,6 +174,36 @@
             <div><code>Image</code><span>Window image/icon value.</span></div>
             <div><code>sidebarLayout</code><span>Controls the sidebar-style layout.</span></div>
             <div><code>theme</code><span>Base visual theme.</span></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="window-full-form">
+        <div class="section-heading reveal"><span class="section-number">06</span><div><h2>Window Full Form</h2><p>A complete CreateWindow configuration with size, UI scale, animation, and theme settings.</p></div></div>
+        <div class="window-top-tabs reveal">
+          <a class="window-top-tab" href="#window" data-route-link>Single Window</a>
+          <a class="window-top-tab active" href="#window-full-form" data-route-link>Full Form</a>
+        </div>
+        <div class="code-card reveal">
+          <div class="code-head"><span>Full Form</span><button class="copy-btn" data-target="windowFullFormCode" aria-label="Copy window full form code" title="Copy window full form code"></button></div>
+          <pre id="windowFullFormCode"><code>local window = DarkyX:CreateWindow({
+    Title = "DarkyX Hub",
+    subtitle = "DarkyX",
+    Image = "house",
+    sidebarLayout = false,
+    Size = UDim2.fromOffset(550, 340),
+    UIScale = "0.7",
+    Animation = true,
+    theme = "Default",
+})</code></pre>
+        </div>
+        <div class="api-card reveal">
+          <div class="api-title"><code>Full CreateWindow options</code><span class="badge">FULL</span></div>
+          <div class="prop-grid">
+            <div><code>Size</code><span>Sets the window dimensions using a Roblox UDim2 offset.</span></div>
+            <div><code>UIScale</code><span>Controls the interface scale for the window.</span></div>
+            <div><code>Animation</code><span>Enables the window animation behavior.</span></div>
+            <div><code>theme</code><span>Uses the selected DarkyX theme such as Default.</span></div>
           </div>
         </div>
       </section>
@@ -200,6 +236,27 @@
     name = "Aiming",
     icon = 93364949241311,
 })</code></pre></div>
+      </section>
+
+      <section class="section" id="groups">
+        <div class="section-heading reveal"><span class="section-number">09</span><div><h2>Groups</h2><p>Create a two-sided group layout and place controls into the left or right side.</p></div></div>
+        <div class="code-card reveal">
+          <div class="code-head"><span>Create Group Grid</span><button class="copy-btn" data-target="groupGridCode" aria-label="Copy group grid code" title="Copy group grid code"></button></div>
+          <pre id="groupGridCode"><code>local grid = Tab:CreateGroup()</code></pre>
+        </div>
+        <div class="split-grid reveal">
+          <div class="code-card"><div class="code-head"><span>GroupsLeftside</span><button class="copy-btn" data-target="groupLeftCode" aria-label="Copy group left code" title="Copy group left code"></button></div><pre id="groupLeftCode"><code>local left = grid:CreateGroupLeft()</code></pre></div>
+          <div class="code-card"><div class="code-head"><span>GroupsRightside</span><button class="copy-btn" data-target="groupRightCode" aria-label="Copy group right code" title="Copy group right code"></button></div><pre id="groupRightCode"><code>local right = grid:CreateGroupRight()</code></pre></div>
+        </div>
+        <div class="api-card reveal">
+          <div class="api-title"><code>Group layout</code><span class="badge">LAYOUT</span></div>
+          <div class="prop-grid">
+            <div><code>Tab:CreateGroup()</code><span>Creates the parent two-column group grid.</span></div>
+            <div><code>grid:CreateGroupLeft()</code><span>Returns the left-side group container.</span></div>
+            <div><code>grid:CreateGroupRight()</code><span>Returns the right-side group container.</span></div>
+            <div><code>left / right</code><span>Store the returned containers so you can add your supported controls to each side.</span></div>
+          </div>
+        </div>
       </section>
 
       <section class="section" id="button">
@@ -321,6 +378,9 @@ revenue:Set(revenue.value + 500)</code></pre></div></div>
               <tr><td><code>Tag:Set</code></td><td>Update tag text/color.</td><td>Tag update</td></tr>
               <tr><td><code>CreateTab</code></td><td>Create a page.</td><td>Tab object</td></tr>
               <tr><td><code>CreateSection</code></td><td>Create a grouping label.</td><td>Section object</td></tr>
+              <tr><td><code>CreateGroup</code></td><td>Create a two-column group layout.</td><td>Group grid</td></tr>
+              <tr><td><code>CreateGroupLeft</code></td><td>Create the left group container.</td><td>Left group</td></tr>
+              <tr><td><code>CreateGroupRight</code></td><td>Create the right group container.</td><td>Right group</td></tr>
               <tr><td><code>CreateButton</code></td><td>Run an action.</td><td>callback()</td></tr>
               <tr><td><code>CreateToggle</code></td><td>Store a boolean state.</td><td>callback(value)</td></tr>
               <tr><td><code>CreateDropdown</code></td><td>Choose one or more options.</td><td>callback(selected)</td></tr>
@@ -348,7 +408,7 @@ revenue:Set(revenue.value + 500)</code></pre></div></div>
 
 
       <section class="section" id="full-example">
-        <div class="section-heading reveal"><span class="section-number">13</span><div><h2>Full Example</h2><p>Use this only when you want the entire API flow in one Lua file. Individual usage pages above stay focused.</p></div></div>
+        <div class="section-heading reveal"><span class="section-number">16</span><div><h2>Full Example</h2><p>Use this only when you want the entire API flow in one Lua file. Individual usage pages above stay focused.</p></div></div>
         <div class="code-card large-code reveal">
           <div class="code-head"><span>DarkyX Hub — complete example</span><button class="copy-btn" data-target="fullCode">Copy all</button></div>
           <pre id="fullCode"><code>local DarkyX = loadstring(game:HttpGet("https://github.com/sokpanha10000-oss/DarkyUI/releases/latest/download/DarkyX.lua"))()
@@ -526,6 +586,7 @@ button{color:inherit}
 @media(max-width:620px){.topbar{left:10px;right:10px;top:10px}.top-link{display:none}.layout{padding:84px 8px 22px}.section{padding:56px 6px 10px}.hero{padding-top:40px}.hero h1{font-size:43px}.hero-copy{font-size:14px}.feature-grid,.effect-grid,.info-grid{grid-template-columns:1fr}.feature-card{min-height:95px}.hero-actions{flex-wrap:wrap}.hero-actions>*{width:100%;justify-content:center}.section-heading h2{font-size:24px}.code-card pre{font-size:10px}.footer{margin-left:6px;margin-right:6px;flex-direction:column;align-items:flex-start;gap:12px}.brand small{display:none}}
 
 
+.window-top-tabs{display:flex;gap:6px;padding:5px;width:max-content;max-width:100%;margin:0 0 14px;border:1px solid rgba(255,255,255,.07);border-radius:12px;background:rgba(4,7,10,.65);box-shadow:inset 0 0 0 1px rgba(255,255,255,.02)}.window-top-tab{display:inline-flex;align-items:center;justify-content:center;min-height:31px;padding:0 12px;border-radius:8px;color:#74808b;font-size:10px;font-weight:700;border:1px solid transparent;transition:all .2s ease}.window-top-tab:hover{color:#dbe6ee;background:rgba(255,255,255,.04)}.window-top-tab.active{color:#fff;background:linear-gradient(180deg,rgba(52,132,204,.24),rgba(31,78,120,.14));border-color:rgba(86,175,255,.22);box-shadow:0 0 18px rgba(64,153,255,.08)}
 .window-cta{display:flex;align-items:center;justify-content:space-between;gap:16px;margin:14px 0;padding:14px 16px;border:1px solid rgba(80,170,255,.15);border-radius:14px;background:linear-gradient(100deg,rgba(25,60,90,.28),rgba(10,14,20,.62));box-shadow:0 14px 40px rgba(0,0,0,.22)}
 .window-cta b{display:block;font-size:12px}.window-cta span{display:block;color:#71808e;font-size:10px;margin-top:2px}.mini-btn{font-size:10px;padding:9px 12px;border-radius:9px;border:1px solid rgba(255,255,255,.10);background:rgba(255,255,255,.045);color:#dfe8ef;transition:transform .2s ease,background .2s ease,border-color .2s ease}.mini-btn:hover{transform:translateY(-1px);background:rgba(70,160,255,.12);border-color:rgba(80,170,255,.26)}
 .usage-bar{display:flex;align-items:center;justify-content:space-between;padding:10px 12px;border-bottom:1px solid rgba(255,255,255,.06);background:rgba(255,255,255,.015)}.usage-bar span{font:700 8px var(--mono);letter-spacing:.12em;text-transform:uppercase;color:#687480}.usage-bar .copy-btn{margin:0}
