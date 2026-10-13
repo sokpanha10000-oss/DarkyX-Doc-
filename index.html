@@ -17,7 +17,7 @@
 
   <header class="topbar glass">
     <a class="brand" href="#introduction" aria-label="DarkyX home">
-      <span class="brand-mark">DX</span>
+      <span class="brand-mark" aria-hidden="true">D</span>
       <span>
         <strong>DarkyX</strong>
         <small>UI Library</small>
@@ -26,7 +26,7 @@
     <div class="topbar-actions">
       <button class="icon-btn mobile-menu" id="mobileMenu" aria-label="Open menu">☰</button>
       <a class="top-link" href="https://github.com/sokpanha10000-oss/DarkyUI" target="_blank" rel="noopener">GitHub ↗</a>
-      <span class="version-pill">Reboot-ready</span>
+      <span class="version-pill">DARKYX&nbsp;·&nbsp;API DOCS</span>
     </div>
   </header>
 
@@ -60,8 +60,10 @@
           <a href="#dropdown" data-nav>Dropdown</a>
           <a href="#slider" data-nav>Slider</a>
           <a href="#input" data-nav>Input</a>
+          <a href="#note" data-nav>Note</a>
           <a href="#stat" data-nav>Stat</a>
           <a href="#color-picker" data-nav>Color Picker</a>
+          <a href="#popup" data-nav>Popup</a>
 
           <div class="nav-label">WINDOW FEATURES</div>
           <a href="#notifications" data-nav>Notifications</a>
@@ -76,7 +78,7 @@
 
         <div class="sidebar-footer">
           <span class="status-dot"></span>
-          <span>DarkyX documentation</span>
+          <span>DarkyX docs · interactive reference</span>
         </div>
       </div>
     </aside>
@@ -229,6 +231,7 @@
     Size = UDim2.fromOffset(550, 340),
     UIScale = "0.7",
     Animation = true,
+    Effect = true,
     theme = "Default",
 })</code></pre>
           </div>
@@ -238,6 +241,7 @@
               <div><code>Size</code><span>Sets the window dimensions using a Roblox UDim2 offset.</span></div>
               <div><code>UIScale</code><span>Controls the interface scale for the window.</span></div>
               <div><code>Animation</code><span>Enables the window animation behavior.</span></div>
+            <div><code>Effect</code><span>Enables the library's additional visual effects when supported by the current build.</span></div>
               <div><code>theme</code><span>Uses the selected DarkyX theme such as Default.</span></div>
             </div>
           </div>
@@ -357,6 +361,20 @@ Dropdown:Refresh({"Jump Boost", "Speed Boost"})</code></pre></div></div>
 })</code></pre></div></div>
       </section>
 
+      <section class="section" id="note">
+        <div class="element-doc reveal">
+          <div class="element-top"><span class="control-chip">NOTE</span><code>tab:CreateNote({...})</code></div>
+          <p>Add a compact informational note to a tab. <code>Title</code> sets the note heading and <code>Note</code> contains the message.</p>
+          <div class="code-card inline">
+            <div class="usage-bar"><span>Usage</span><button class="copy-btn" data-target="noteUsageCode" aria-label="Copy Note usage" title="Copy Note usage"></button></div>
+            <pre id="noteUsageCode"><code>tab:CreateNote({
+    Title = "Note",
+    Note = "Your first UI library",
+})</code></pre>
+          </div>
+        </div>
+      </section>
+
       <section class="section" id="stat">
         <div class="element-doc reveal">
           <div class="element-top"><span class="control-chip">STAT</span><code>tab:CreateStat({...})</code></div>
@@ -371,7 +389,7 @@ Dropdown:Refresh({"Jump Boost", "Speed Boost"})</code></pre></div></div>
           </div>
           <div class="code-card inline">
             <div class="usage-bar"><span>Update</span><button class="copy-btn" data-target="statSetCode" aria-label="Copy stat update code" title="Copy stat update code"></button></div>
-            <pre id="statSetCode"><code>revenue:Set(revenue.value + 500)</code></pre>
+            <pre id="statSetCode"><code>revenue:Set(12900)</code></pre>
           </div>
         </div>
       </section>
@@ -386,18 +404,72 @@ Dropdown:Refresh({"Jump Boost", "Speed Boost"})</code></pre></div></div>
 })</code></pre></div></div>
       </section>
 
+      <section class="section" id="popup">
+        <div class="element-doc reveal">
+          <div class="element-top"><span class="control-chip">POPUP</span><code>window:Popup({...})</code></div>
+          <p>Open a confirmation dialog with a title, description, and up to two action choices. Use the second option for the main destructive or confirm action.</p>
+          <div class="code-card inline">
+            <div class="usage-bar"><span>Usage</span><button class="copy-btn" data-target="popupUsageCode" aria-label="Copy popup usage" title="Copy popup usage"></button></div>
+            <pre id="popupUsageCode"><code>window:Popup({
+    title = "Reset everything?",
+    content = "This clears every saved value. You can't undo it.",
+    options = {
+        { FirstText = "Cancel" },
+        { SecondText = "Reset", Color = Color3.fromRGB(255, 160, 16),
+          callback = function() end },
+    },
+})</code></pre>
+          </div>
+          <div class="api-card reveal">
+            <div class="api-title"><code>Popup options</code><span class="badge">DIALOG</span></div>
+            <div class="prop-grid">
+              <div><code>title</code><span>Popup heading shown at the top.</span></div>
+              <div><code>content</code><span>Explanation or warning text shown below the title.</span></div>
+              <div><code>FirstText</code><span>Text for the first action, commonly Cancel.</span></div>
+              <div><code>SecondText</code><span>Text for the primary action, commonly Confirm or Reset.</span></div>
+              <div><code>Color</code><span>Optional color for the second action.</span></div>
+              <div><code>callback</code><span>Runs when the second action is selected.</span></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       <section class="section" id="notifications">
-        <div class="section-heading reveal"><span class="section-number">08</span><div><h2>Notifications</h2><p>Give instant feedback without interrupting the current UI flow.</p></div></div>
-        <div class="code-card reveal"><div class="code-head"><span>Notify</span><button class="copy-btn" data-target="notifyCode">Copy</button></div><pre id="notifyCode"><code>window:Notify({
-    title = "Auto-saved",
-    content = "Your configuration was saved.",
+        <div class="section-heading reveal"><span class="section-number">09</span><div><h2>Notifications</h2><p>Use the topbar switcher to choose between a basic notification and the callback-enabled Full Form.</p></div></div>
+        <div class="window-top-tabs reveal" role="tablist" aria-label="Notification usage variants">
+          <button class="window-top-tab active" type="button" data-switch-group="notify" data-switch-target="notify-basic" role="tab" aria-selected="true">Basic</button>
+          <button class="window-top-tab" type="button" data-switch-group="notify" data-switch-target="notify-full" role="tab" aria-selected="false">Full Form</button>
+        </div>
+        <div class="switch-panel active" data-switch-panel="notify" id="notify-basic">
+          <div class="window-cta reveal"><div><b>Basic Notify</b><span>Use the essential fields for a simple message. This basic form does not include a Callback.</span></div></div>
+          <div class="code-card reveal"><div class="code-head"><span>Basic Usage</span><button class="copy-btn" data-target="notifyBasicCode" aria-label="Copy basic notification code" title="Copy basic notification code"></button></div><pre id="notifyBasicCode"><code>window:Notify({
+    Title = "Auto-saved",
+    Content = "Your configuration was saved.",
     Icon = "rbxassetid://0",
-    duration = 5,
+    Duration = 5,
 })</code></pre></div>
+        </div>
+        <div class="switch-panel" data-switch-panel="notify" id="notify-full">
+          <div class="window-cta reveal"><div><b>Full Form</b><span>Use the expanded form when you need the callback field alongside the title, content, icon, and duration.</span></div></div>
+          <div class="code-card reveal"><div class="code-head"><span>Full Notification Usage</span><button class="copy-btn" data-target="notifyFullCode" aria-label="Copy full notification code" title="Copy full notification code"></button></div><pre id="notifyFullCode"><code>window:Notify({
+    Title = "Auto-saved",
+    Content = "Your configuration was saved.",
+    Icon = "rbxassetid://0",
+    Duration = 5,
+    Callback = function(profile) end,
+})</code></pre></div>
+          <div class="api-card reveal"><div class="api-title"><code>window:Notify(config)</code><span class="badge">NOTIFY</span></div><div class="prop-grid">
+            <div><code>Title</code><span>Headline text shown in the notification.</span></div>
+            <div><code>Content</code><span>Supporting message displayed below the headline.</span></div>
+            <div><code>Icon</code><span>Icon asset or identifier used by the notification.</span></div>
+            <div><code>Duration</code><span>How long the notification is intended to remain visible.</span></div>
+            <div><code>Callback</code><span>Optional function receiving the <code>profile</code> argument.</span></div>
+          </div></div>
+        </div>
       </section>
 
       <section class="section" id="effects">
-        <div class="section-heading reveal"><span class="section-number">09</span><div><h2>Visual System</h2><p>The documentation theme intentionally mirrors the DarkyX direction: darker surfaces, soft light, and controlled animation.</p></div></div>
+        <div class="section-heading reveal"><span class="section-number">10</span><div><h2>Visual System</h2><p>The documentation theme intentionally mirrors the DarkyX direction: darker surfaces, soft light, and controlled animation.</p></div></div>
         <div class="effect-grid reveal">
           <article class="effect-card"><span class="effect-orb"></span><h3>Soft glow</h3><p>Localized highlights replace harsh neon borders, keeping controls readable without flooding the screen.</p></article>
           <article class="effect-card"><span class="effect-pulse"></span><h3>Micro motion</h3><p>Navigation and cards use small transitions so movement supports hierarchy rather than distracting from it.</p></article>
@@ -406,7 +478,7 @@ Dropdown:Refresh({"Jump Boost", "Speed Boost"})</code></pre></div></div>
       </section>
 
       <section class="section" id="responsive">
-        <div class="section-heading reveal"><span class="section-number">10</span><div><h2>Responsive Layout</h2><p>The docs collapse into a mobile-friendly navigation drawer on narrow screens.</p></div></div>
+        <div class="section-heading reveal"><span class="section-number">11</span><div><h2>Responsive Layout</h2><p>The docs collapse into a mobile-friendly navigation drawer on narrow screens.</p></div></div>
         <div class="info-grid reveal">
           <div class="info-card"><b>Desktop</b><span>Fixed navigation + wide code panels.</span></div>
           <div class="info-card"><b>Tablet</b><span>Reduced spacing + wrapped cards.</span></div>
@@ -415,7 +487,7 @@ Dropdown:Refresh({"Jump Boost", "Speed Boost"})</code></pre></div></div>
       </section>
 
       <section class="section" id="api">
-        <div class="section-heading reveal"><span class="section-number">11</span><div><h2>API Cheat Sheet</h2><p>A quick lookup of the API shown in this documentation.</p></div></div>
+        <div class="section-heading reveal"><span class="section-number">12</span><div><h2>API Cheat Sheet</h2><p>A quick lookup of the API shown in this documentation.</p></div></div>
         <div class="table-card reveal">
           <table>
             <thead><tr><th>API</th><th>Purpose</th><th>Returns / callback</th></tr></thead>
@@ -434,9 +506,11 @@ Dropdown:Refresh({"Jump Boost", "Speed Boost"})</code></pre></div></div>
               <tr><td><code>Dropdown:Refresh</code></td><td>Replace dropdown options.</td><td>Updated options</td></tr>
               <tr><td><code>CreateSlider</code></td><td>Choose a numeric value.</td><td>callback(value)</td></tr>
               <tr><td><code>CreateInput</code></td><td>Commit text/numeric input.</td><td>callback(text)</td></tr>
+              <tr><td><code>CreateNote</code></td><td>Add an informational note to a tab.</td><td>Note element</td></tr>
               <tr><td><code>CreateStat</code></td><td>Display and update a stat.</td><td>Stat object</td></tr>
               <tr><td><code>Stat:Set</code></td><td>Change the stat value.</td><td>Updated value</td></tr>
               <tr><td><code>CreateColorPicker</code></td><td>Choose a color + alpha.</td><td>callback(color, alpha)</td></tr>
+              <tr><td><code>Popup</code></td><td>Show a confirmation dialog with actions.</td><td>Popup dialog</td></tr>
               <tr><td><code>Notify</code></td><td>Show a temporary notification.</td><td>Notification</td></tr>
             </tbody>
           </table>
@@ -444,7 +518,7 @@ Dropdown:Refresh({"Jump Boost", "Speed Boost"})</code></pre></div></div>
       </section>
 
       <section class="section" id="notes">
-        <div class="section-heading reveal"><span class="section-number">12</span><div><h2>Notes & Conventions</h2><p>Small patterns that keep a DarkyX project clean and predictable.</p></div></div>
+        <div class="section-heading reveal"><span class="section-number">13</span><div><h2>Notes & Conventions</h2><p>Small patterns that keep a DarkyX project clean and predictable.</p></div></div>
         <div class="notes-grid reveal">
           <article><b>Names</b><p>Use readable element names and short descriptions so a crowded hub remains easy to scan.</p></article>
           <article><b>Flags</b><p>Use stable flag strings for settings that you may need to reference consistently.</p></article>
@@ -465,6 +539,7 @@ local window = DarkyX:CreateWindow({
     subtitle = "DarkyX",
     Image = "house",
     sidebarLayout = false,
+    Effect = true,
     theme = "Default",
 })
 
@@ -486,6 +561,11 @@ local tab = window:CreateTab({
 local Section = tab:CreateSection({
     name = "Aiming",
     icon = 93364949241311,
+})
+
+tab:CreateNote({
+    Title = "Note",
+    Note = "Your first UI library",
 })
 
 tab:CreateButton({
@@ -562,6 +642,16 @@ tab:CreateColorPicker({
     callback = function(color, alpha)
         print(color, alpha)
     end,
+})
+
+window:Popup({
+    title = "Reset everything?",
+    content = "This clears every saved value. You can't undo it.",
+    options = {
+        { FirstText = "Cancel" },
+        { SecondText = "Reset", Color = Color3.fromRGB(255, 160, 16),
+          callback = function() end },
+    },
 })
 
 window:Notify({
@@ -662,6 +752,193 @@ button{color:inherit}
 .page-nav .page-progress{display:flex;align-items:center;justify-content:center;flex:0 0 76px;font:700 8px var(--mono);color:#687480;letter-spacing:.1em;text-transform:uppercase}
 .step-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}.step-card{border:1px solid var(--line);border-radius:15px;padding:18px;background:linear-gradient(180deg,rgba(17,23,30,.72),rgba(8,11,15,.78));min-height:190px}.step-card>span{display:inline-grid;place-items:center;width:30px;height:30px;border-radius:10px;background:rgba(75,155,255,.10);border:1px solid rgba(88,174,255,.16);font:800 9px var(--mono);color:#8ccfff}.step-card b{display:block;font-size:13px;margin-top:15px}.step-card p{font-size:11px;color:#737f8b;min-height:52px}.step-card .mini-btn{display:inline-flex}
 @media(max-width:720px){.step-grid{grid-template-columns:1fr}.page-nav .page-progress{display:none}.page-nav .page-nav-btn{flex:1}.page-nav .page-nav-btn.next{justify-content:flex-end}}
+
+
+
+/* DarkyX interface refresh: cinematic midnight surfaces, cobalt light, and tighter docs hierarchy. */
+:root{
+  --bg:#05070c;
+  --panel:#0b101a;
+  --panel-2:#101827;
+  --panel-3:#151f30;
+  --text:#f4f7ff;
+  --muted:#a1aec2;
+  --muted-2:#71819a;
+  --line:rgba(145,177,230,.13);
+  --line-strong:rgba(145,177,230,.24);
+  --accent:#e6f1ff;
+  --accent-2:#80bdff;
+  --green:#77edb1;
+  --yellow:#ffb84d;
+  --shadow:0 24px 80px rgba(0,0,0,.48),0 0 38px rgba(29,100,207,.06);
+  --radius:20px;
+}
+html{background:#05070c;scroll-padding-top:90px}
+body{
+  background:
+    radial-gradient(ellipse at 74% -12%,rgba(28,91,169,.19),transparent 42%),
+    radial-gradient(ellipse at 6% 37%,rgba(66,54,145,.12),transparent 33%),
+    linear-gradient(155deg,#06080d 0%,#070b13 48%,#05070b 100%);
+  color:var(--text);
+}
+.ambient{opacity:.62;filter:blur(70px)}
+.ambient-a{background:rgba(25,104,204,.19)}
+.ambient-b{background:rgba(91,69,202,.12)}
+.grid-bg{opacity:.09;background-size:64px 64px}
+.glass{
+  background:linear-gradient(135deg,rgba(14,21,34,.88),rgba(6,10,17,.86));
+  border-color:rgba(137,174,235,.17);
+  box-shadow:0 18px 65px rgba(0,0,0,.40),inset 0 1px 0 rgba(255,255,255,.035);
+  backdrop-filter:blur(24px) saturate(135%);
+}
+.topbar{
+  left:clamp(10px,2vw,26px);right:clamp(10px,2vw,26px);top:12px;height:64px;
+  border-radius:18px;padding:0 16px 0 18px;
+  background:linear-gradient(110deg,rgba(13,20,33,.94),rgba(8,13,22,.88));
+}
+.brand{gap:12px}
+.brand-mark{
+  width:38px;height:38px;border-radius:12px;color:#fff;font-size:23px;letter-spacing:-.08em;
+  background:linear-gradient(145deg,#6fc5ff 0%,#246bd5 48%,#23385c 100%);
+  border:1px solid rgba(173,220,255,.38);
+  box-shadow:0 0 0 4px rgba(50,124,232,.08),0 8px 28px rgba(32,114,233,.25),inset 0 1px 0 rgba(255,255,255,.32);
+  text-shadow:0 2px 7px rgba(0,0,0,.35);
+}
+.brand strong{font-size:15px;letter-spacing:.01em}
+.brand small{margin-top:1px;color:#768bac;letter-spacing:.18em;font-size:9px}
+.topbar-actions{gap:10px}
+.top-link,.version-pill,.icon-btn{
+  height:35px;border-radius:11px;border-color:rgba(140,180,240,.17);
+  background:rgba(20,34,54,.46);font-size:10px;letter-spacing:.025em;
+}
+.top-link:hover,.icon-btn:hover{border-color:rgba(102,174,255,.32);background:rgba(52,111,190,.13)}
+.version-pill{color:#88bdfb;background:rgba(34,91,159,.13);border-color:rgba(87,153,238,.22);font-size:9px;font-weight:800;letter-spacing:.12em}
+.layout{grid-template-columns:252px minmax(0,1fr);gap:22px;max-width:1520px;padding:96px 22px 48px}
+.sidebar{top:94px;height:calc(100vh - 112px);border-radius:20px;background:linear-gradient(180deg,rgba(12,18,29,.91),rgba(7,11,18,.90))}
+.sidebar-scroll{padding:15px 12px}
+.search-wrap{height:42px;border-radius:12px;border-color:rgba(128,169,229,.15);background:rgba(6,11,19,.62)}
+.search-wrap:focus-within{border-color:rgba(91,164,255,.42);box-shadow:0 0 0 3px rgba(41,121,218,.09)}
+.search-wrap input{font-size:11px}
+.nav{gap:3px}
+.nav-label{color:#627895;letter-spacing:.2em;margin-top:17px;font-size:8px}
+.nav a{padding:9px 11px;border-radius:10px;color:#8b9ab1;font-size:11px}
+.nav a:hover{background:rgba(82,136,213,.09);color:#e9f3ff;transform:translateX(3px)}
+.nav a.active{color:#e9f4ff;background:linear-gradient(100deg,rgba(40,111,211,.22),rgba(61,87,156,.07));box-shadow:inset 0 0 0 1px rgba(103,169,255,.12)}
+.nav a.active:before{top:8px;bottom:8px;width:3px;background:linear-gradient(#a2d9ff,#4389fa);box-shadow:0 0 16px rgba(69,148,255,.8)}
+.sidebar-footer{border-color:rgba(129,164,224,.12);font-size:9px;color:#7586a2}
+.content{min-width:0}
+.section{padding:66px 20px 12px;scroll-margin-top:86px}
+.hero{padding-top:40px}
+.hero-art{border-radius:24px;border-color:rgba(117,172,248,.24);box-shadow:0 30px 95px rgba(0,0,0,.55),0 0 75px rgba(30,103,214,.12)}
+.hero-art img{filter:saturate(1.02) contrast(1.07) brightness(.80)}
+.hero-art:hover img{filter:saturate(1.08) contrast(1.08) brightness(.88)}
+.eyebrow{color:#80b9fa;font-size:9px;letter-spacing:.25em}
+.hero h1{font-size:clamp(42px,5.7vw,76px);line-height:.99;letter-spacing:-.06em;margin:16px 0 20px}
+.hero h1 span{background:linear-gradient(100deg,#f6fbff 10%,#8cc6ff 55%,#a99bff 100%);-webkit-background-clip:text;background-clip:text;color:transparent;text-shadow:none}
+.hero-copy{max-width:700px;color:#a5b3c9;font-size:14px;line-height:1.85}
+.hero-actions{gap:12px;margin-top:25px}
+.primary-btn,.ghost-btn{height:44px;border-radius:12px;padding:0 17px;font-size:11px;transition:transform .2s ease,box-shadow .2s ease,border-color .2s ease,background .2s ease}
+.primary-btn{color:#06101e;background:linear-gradient(135deg,#eaf6ff,#84c7ff 65%,#a8bdff);border:1px solid rgba(209,235,255,.72);box-shadow:0 10px 30px rgba(55,138,245,.19)}
+.primary-btn:hover{transform:translateY(-2px);box-shadow:0 15px 38px rgba(55,138,245,.27)}
+.ghost-btn{color:#dcecff;border-color:rgba(125,174,244,.23);background:rgba(17,32,53,.52)}
+.ghost-btn:hover{background:rgba(36,89,157,.18);border-color:rgba(127,188,255,.39)}
+.feature-grid{gap:12px;margin-top:34px}
+.feature-card{border-radius:17px;padding:18px;background:linear-gradient(145deg,rgba(17,29,47,.72),rgba(8,13,22,.80));border:1px solid rgba(122,163,225,.12);transition:transform .24s ease,border-color .24s ease,background .24s ease}
+.feature-card:hover,.step-card:hover,.effect-card:hover,.info-card:hover,.notes-grid article:hover{transform:translateY(-3px);border-color:rgba(104,169,255,.27);background-color:rgba(23,43,70,.22)}
+.feature-icon{background:linear-gradient(145deg,rgba(73,142,234,.2),rgba(78,81,179,.12));border:1px solid rgba(116,177,255,.17);color:#b8dcff}
+.feature-card b{font-size:11px;color:#e6f2ff}
+.feature-card p{color:#8395af;font-size:10px;line-height:1.65}
+.section-heading{gap:15px;margin-bottom:22px}
+.section-number{color:#6e87ab;font-size:9px;padding-top:3px}
+.section-heading h2{font-size:clamp(25px,2.7vw,32px);letter-spacing:-.045em;color:#f1f6ff}
+.section-heading p{max-width:760px;color:#8c9db6;font-size:11px;line-height:1.8}
+.code-card{border-color:rgba(124,165,229,.15);border-radius:16px;background:linear-gradient(150deg,#090f19,#060a11);box-shadow:0 16px 48px rgba(0,0,0,.28),inset 0 1px 0 rgba(255,255,255,.025)}
+.code-head{height:43px;padding:0 13px;background:linear-gradient(100deg,rgba(19,31,49,.98),rgba(9,16,27,.98));border-bottom-color:rgba(132,173,234,.12);color:#97acc9;font-size:9px;letter-spacing:.05em}
+.code-card pre{padding:19px 20px 21px;font-size:11px;line-height:1.82;color:#d8e5f7;tab-size:4}
+.copy-btn{width:30px;height:30px;border-radius:9px;border-color:rgba(132,177,241,.19);background:rgba(30,52,81,.34);color:#9abde9}
+.copy-btn:hover{color:#eaf5ff;background:rgba(56,112,190,.20);border-color:rgba(113,183,255,.42);box-shadow:0 0 18px rgba(44,128,238,.12)}
+.copy-btn.copied{color:#8af1b3;background:rgba(42,151,100,.12);border-color:rgba(99,226,157,.36);box-shadow:0 0 22px rgba(76,210,132,.12)}
+.api-card,.element-doc,.effect-card,.info-card,.notes-grid article{border-color:rgba(124,165,229,.13);background:linear-gradient(145deg,rgba(15,24,39,.86),rgba(7,12,20,.88));border-radius:17px;box-shadow:inset 0 1px 0 rgba(255,255,255,.025)}
+.api-card,.element-doc{padding:19px}
+.api-title{border-bottom-color:rgba(129,169,229,.13)}
+.api-title code,.element-top code{color:#d8eaff}
+.badge,.control-chip{color:#85baff;border-color:rgba(96,160,243,.22);background:rgba(43,98,167,.11);border-radius:8px}
+.prop-grid>div{border-bottom-color:rgba(131,168,221,.09)}
+.prop-grid code{color:#cce3ff}
+.prop-grid span{color:#8b9db6;line-height:1.7}
+.callout{border-left-color:#64a7ff;background:linear-gradient(100deg,rgba(33,85,155,.13),rgba(10,17,28,.34));color:#8da1bc;border-radius:0 13px 13px 0;padding:15px 16px;font-size:10px;line-height:1.8}
+.callout strong{color:#dcedff}
+.window-top-tabs{padding:5px;border-radius:14px;border-color:rgba(126,169,234,.17);background:rgba(5,10,18,.72);box-shadow:inset 0 1px 0 rgba(255,255,255,.025),0 8px 24px rgba(0,0,0,.12);gap:5px;margin-bottom:16px}
+.window-top-tab{min-height:35px;padding:0 15px;border-radius:10px;color:#8193ad;font-size:10px;letter-spacing:.015em}
+.window-top-tab:hover{color:#edf6ff;background:rgba(67,123,199,.12)}
+.window-top-tab.active,.window-top-tab[aria-selected="true"]{color:#f1f8ff;background:linear-gradient(140deg,rgba(48,122,220,.28),rgba(91,83,197,.17));border-color:rgba(106,178,255,.32);box-shadow:0 0 22px rgba(44,117,220,.12),inset 0 1px 0 rgba(255,255,255,.065)}
+.window-cta{display:flex;align-items:center;justify-content:space-between;padding:15px 17px;border-radius:14px;background:linear-gradient(110deg,rgba(20,47,79,.60),rgba(24,24,51,.28));border:1px solid rgba(104,161,237,.13);margin:0 0 12px}
+.window-cta b{display:block;color:#e9f3ff;font-size:11px}
+.window-cta span{display:block;color:#8ca0bc;font-size:10px;line-height:1.7;margin-top:3px}
+.element-top{gap:12px}
+.element-doc p{color:#8d9db5;line-height:1.85}
+.usage-bar{border-bottom-color:rgba(129,169,229,.12);background:rgba(13,24,40,.60)}
+.usage-bar span{color:#7f95b4}
+.table-card{border-color:rgba(124,165,229,.15);background:#080e17;border-radius:16px}
+.table-card th{background:#101a2a;color:#7f93b0}
+.table-card th,.table-card td{border-bottom-color:rgba(131,168,221,.09)}
+.table-card td{color:#9aaac0}
+.table-card code{color:#cae2ff}
+.page-nav{margin-top:30px;padding-top:17px;border-top:1px solid rgba(129,169,229,.13)}
+.page-nav .page-nav-btn{border-color:rgba(126,169,234,.13);background:linear-gradient(145deg,rgba(15,25,41,.74),rgba(7,12,20,.76));border-radius:13px}
+.page-nav .page-nav-btn:hover{border-color:rgba(97,170,255,.32);background:rgba(36,88,153,.14)}
+.page-nav .nav-arrow{color:#81bdff}
+.page-nav .nav-small{color:#7189a9}
+.page-nav .nav-title{color:#d8e9ff}
+.page-nav .page-progress{color:#7189a9}
+.footer{border:1px solid rgba(125,166,229,.14);background:linear-gradient(120deg,rgba(14,23,38,.8),rgba(7,12,20,.86));border-radius:18px}
+.footer strong{color:#edf5ff}
+.footer span{color:#8498b5}
+.footer a{color:#9dcbff}
+.toast{border-color:rgba(119,174,247,.22);background:rgba(9,16,27,.96);box-shadow:0 20px 60px rgba(0,0,0,.46),0 0 28px rgba(43,116,212,.10);border-radius:13px;padding:12px 15px;font-size:10px}
+.step-card{border-color:rgba(124,165,229,.14);background:linear-gradient(150deg,rgba(15,24,39,.84),rgba(7,12,20,.88));border-radius:17px;transition:transform .24s ease,border-color .24s ease}
+.step-card>span{background:rgba(53,123,217,.14);border-color:rgba(109,175,255,.21);color:#8ec7ff}
+.step-card p{color:#8d9db5;line-height:1.75}
+.step-card b{color:#e4efff}
+.mini-btn{border-color:rgba(115,169,244,.2)!important;background:rgba(32,74,129,.14)!important;color:#b1d7ff!important;border-radius:9px!important}
+.mini-btn:hover{border-color:rgba(115,184,255,.4)!important;background:rgba(42,108,187,.22)!important}
+.effect-orb{background:radial-gradient(circle,rgba(80,165,255,.35),rgba(80,165,255,0))}
+.effect-pulse{border-color:rgba(140,200,255,.8);box-shadow:0 0 0 10px rgba(80,145,255,.04),0 0 35px rgba(85,162,255,.23)}
+.effect-line{background:linear-gradient(90deg,transparent,rgba(100,169,255,.46),transparent)}
+:focus-visible{outline:2px solid rgba(118,185,255,.72);outline-offset:3px}
+::selection{background:rgba(68,135,224,.35);color:#fff}
+@media(max-width:980px){
+  .layout{grid-template-columns:1fr;gap:12px;padding:91px 18px 38px}
+  .sidebar{background:linear-gradient(180deg,rgba(11,18,30,.98),rgba(6,10,17,.98));border-color:rgba(137,174,235,.2)}
+}
+@media(max-width:720px){
+  .topbar{height:59px;padding:0 11px 0 13px}
+  .brand-mark{width:34px;height:34px;border-radius:11px}
+  .brand strong{font-size:14px}
+  .version-pill{font-size:7px;letter-spacing:.07em;padding:0 7px}
+  .layout{padding:80px 9px 28px}
+  .section{padding:54px 7px 9px}
+  .hero{padding-top:32px}
+  .hero-art{border-radius:18px;margin-bottom:21px}
+  .hero h1{font-size:clamp(39px,11vw,56px)}
+  .hero-copy{font-size:12px}
+  .feature-grid{grid-template-columns:1fr;gap:8px;margin-top:26px}
+  .feature-card{min-height:unset;padding:14px}
+  .section-heading h2{font-size:25px}
+  .window-top-tabs{width:100%;display:flex}
+  .window-top-tab{flex:1;min-width:0;padding:0 9px;font-size:9px}
+  .window-cta{padding:13px;align-items:flex-start}
+  .api-card,.element-doc{padding:14px}
+  .code-card pre{padding:15px 13px;font-size:10px;line-height:1.78}
+  .code-head{padding:0 9px}
+  .copy-btn{flex:0 0 30px}
+  .page-nav{gap:8px}
+  .page-nav .page-nav-btn{padding:10px}
+  .toast{right:10px;bottom:10px;left:10px;justify-content:center}
+}
+@media(prefers-reduced-motion:reduce){
+  *,*::before,*::after{scroll-behavior:auto!important;animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
+}
 
 </style>
   <script>
@@ -786,8 +1063,9 @@ const pageById = new Map(sections.map(section => [section.id, section]));
 const pageIds = sections.map(section => section.id);
 
 function pageTitle(section) {
-  const title = section?.querySelector('h1,h2')?.textContent?.trim();
-  return title || section?.id || 'Page';
+  const heading = section?.querySelector('h1,h2')?.textContent?.trim();
+  const elementLabel = section?.querySelector('.control-chip')?.textContent?.trim();
+  return heading || elementLabel || section?.id || 'Page';
 }
 
 function injectPageNavigation() {
