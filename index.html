@@ -27,6 +27,18 @@
       <button class="icon-btn mobile-menu" id="mobileMenu" aria-label="Open menu">☰</button>
       <a class="top-link" href="https://github.com/sokpanha10000-oss/DarkyUI" target="_blank" rel="noopener">GitHub ↗</a>
       <span class="version-pill">DARKYX&nbsp;·&nbsp;API DOCS</span>
+      <div class="more-menu-wrap">
+        <button class="icon-btn more-menu-trigger" id="moreMenuToggle" type="button" aria-label="More options" aria-haspopup="true" aria-expanded="false" title="More options">⋯</button>
+        <div class="more-menu glass" id="moreMenu" hidden>
+          <span class="menu-heading">Documentation settings</span>
+          <label for="librarySwitcher">Switch UI library</label>
+          <select id="librarySwitcher" aria-label="Switch UI library">
+            <option value="DarkyX">DarkyX · Current</option>
+            <option value="DarkyZ">DarkyZ · Next version</option>
+          </select>
+          <small id="libraryMenuHint">Switches API examples and usage pages.</small>
+        </div>
+      </div>
     </div>
   </header>
 
@@ -60,6 +72,7 @@
           <a href="#dropdown" data-nav>Dropdown</a>
           <a href="#slider" data-nav>Slider</a>
           <a href="#input" data-nav>Input</a>
+          <a href="#elements-v2" data-nav class="darkyx-only">Elements V2</a>
           <a href="#note" data-nav>Note</a>
           <a href="#stat" data-nav>Stat</a>
           <a href="#color-picker" data-nav>Color Picker</a>
@@ -123,7 +136,7 @@
         <div class="section-heading reveal"><span class="section-number">04</span><div><h2>KeySystem</h2><p>Use one page for access protection with a topbar switcher for Standard KeySystem or Platoboost.</p></div></div>
         <div class="window-top-tabs reveal" role="tablist" aria-label="KeySystem variants">
           <button class="window-top-tab active" type="button" data-switch-group="keys" data-switch-target="key-standard" role="tab" aria-selected="true">Standard</button>
-          <button class="window-top-tab" type="button" data-switch-group="keys" data-switch-target="key-platoboost" role="tab" aria-selected="false">Platoboost</button>
+          <button id="key-platoboost-tab" class="window-top-tab" type="button" data-switch-group="keys" data-switch-target="key-platoboost" role="tab" aria-selected="false">Platoboost</button>
         </div>
 
         <div class="switch-panel active" id="key-standard" data-switch-panel="keys">
@@ -201,20 +214,20 @@
             <div class="code-head"><span>Single Window</span><button class="copy-btn" data-target="windowUsageCode" aria-label="Copy single window code" title="Copy single window code"></button></div>
             <pre id="windowUsageCode"><code>local window = DarkyX:CreateWindow({
     Title = "DarkyX Hub",
-    subtitle = "DarkyX",
+    Subtitle = "DarkyX",
     Image = "house",
-    sidebarLayout = false,
-    theme = "Default",
+    SidebarLayout = false,
+    Theme = "Default",
 })</code></pre>
           </div>
           <div class="api-card reveal">
             <div class="api-title"><code>DarkyX:CreateWindow(config)</code><span class="badge">ROOT</span></div>
             <div class="prop-grid">
               <div><code>Title</code><span>Window title text.</span></div>
-              <div><code>subtitle</code><span>Secondary branding text.</span></div>
+              <div><code>Subtitle</code><span>Secondary branding text.</span></div>
               <div><code>Image</code><span>Window image/icon value.</span></div>
-              <div><code>sidebarLayout</code><span>Controls the sidebar-style layout.</span></div>
-              <div><code>theme</code><span>Base visual theme.</span></div>
+              <div><code>SidebarLayout</code><span>Controls the sidebar-style layout.</span></div>
+              <div><code>Theme</code><span>Base visual theme.</span></div>
             </div>
           </div>
         </div>
@@ -225,14 +238,14 @@
             <div class="code-head"><span>Full Form</span><button class="copy-btn" data-target="windowFullFormCode" aria-label="Copy window full form code" title="Copy window full form code"></button></div>
             <pre id="windowFullFormCode"><code>local window = DarkyX:CreateWindow({
     Title = "DarkyX Hub",
-    subtitle = "DarkyX",
+    Subtitle = "DarkyX",
     Image = "house",
-    sidebarLayout = false,
+    SidebarLayout = false,
     Size = UDim2.fromOffset(550, 340),
     UIScale = "0.7",
     Animation = true,
     Effect = true,
-    theme = "Default",
+    Theme = "Default",
 })</code></pre>
           </div>
           <div class="api-card reveal">
@@ -242,7 +255,7 @@
               <div><code>UIScale</code><span>Controls the interface scale for the window.</span></div>
               <div><code>Animation</code><span>Enables the window animation behavior.</span></div>
             <div><code>Effect</code><span>Enables the library's additional visual effects when supported by the current build.</span></div>
-              <div><code>theme</code><span>Uses the selected DarkyX theme such as Default.</span></div>
+              <div><code>Theme</code><span>Uses the selected DarkyX theme such as Default.</span></div>
             </div>
           </div>
         </div>
@@ -254,30 +267,56 @@
         <div class="section-heading reveal"><span class="section-number">05</span><div><h2>Tags</h2><p>Small status or environment labels attached to the window.</p></div></div>
         <div class="split-grid">
           <div class="code-card reveal"><div class="code-head"><span>Create</span><button class="copy-btn" data-target="tagCode">Copy</button></div><pre id="tagCode"><code>local tag = window:CreateTag({
-    text = "us-en",
-    color = Color3.fromRGB(255, 175, 15),
+    Text = "us-en",
+    Color = Color3.fromRGB(255, 175, 15),
 })</code></pre></div>
-          <div class="code-card reveal"><div class="code-head"><span>Update</span><button class="copy-btn" data-target="tagSetCode">Copy</button></div><pre id="tagSetCode"><code>tag:Set({
-    text = "live",
-    color = Color3.fromRGB(80, 200, 120),
+          <div class="code-card reveal darkyx-only"><div class="code-head"><span>Update</span><button class="copy-btn" data-target="tagSetCode">Copy</button></div><pre id="tagSetCode"><code>tag:Set({
+    Text = "live",
+    Color = Color3.fromRGB(80, 200, 120),
 })</code></pre></div>
         </div>
+        <div class="library-compat-note" id="darkyz-tag-note" hidden><span class="compat-icon">i</span><div><strong>Tag update example</strong><span>The supplied DarkyZ sample shows CreateTag, but does not include a tag update call.</span></div></div>
       </section>
 
       <section class="section" id="tabs">
         <div class="section-heading reveal"><span class="section-number">06</span><div><h2>Tabs</h2><p>Split your hub into focused pages such as Combat, Player, Teleport, or Settings.</p></div></div>
         <div class="code-card reveal"><div class="code-head"><span>CreateTab</span><button class="copy-btn" data-target="tabCode">Copy</button></div><pre id="tabCode"><code>local tab = window:CreateTab({
-    name = "Combat",
-    icon = 93364949241311,
+    Title = "Combat",
+    Icon = 93364949241311,
 })</code></pre></div>
       </section>
 
       <section class="section" id="sections">
-        <div class="section-heading reveal"><span class="section-number">07</span><div><h2>Sections</h2><p>Group related controls inside one tab for a cleaner hierarchy.</p></div></div>
-        <div class="code-card reveal"><div class="code-head"><span>CreateSection</span><button class="copy-btn" data-target="sectionCode">Copy</button></div><pre id="sectionCode"><code>local Section = tab:CreateSection({
-    name = "Aiming",
-    icon = 93364949241311,
+        <div class="section-heading reveal"><span class="section-number">07</span><div><h2>Sections</h2><p id="sectionPageDesc">Group related controls inside one tab. Switch between the basic call and the expanded draggable/scaled form.</p></div></div>
+        <div class="window-top-tabs reveal" role="tablist" aria-label="Section usage forms">
+          <button class="window-top-tab active" type="button" data-switch-group="section" data-switch-target="section-basic" role="tab" aria-selected="true">Basic</button>
+          <button class="window-top-tab" type="button" data-switch-group="section" id="section-full-tab" data-switch-target="section-full" role="tab" aria-selected="false">Full Form</button>
+        </div>
+        <div class="switch-panel active" id="section-basic" data-switch-panel="section">
+          <div class="code-card reveal"><div class="code-head"><span>Basic Section</span><button class="copy-btn" data-target="sectionCode" aria-label="Copy basic section code" title="Copy basic section code"></button></div><pre id="sectionCode"><code>local Section = tab:CreateSection({
+    Title = "Aiming",
+    Icon = 93364949241311,
 })</code></pre></div>
+        </div>
+        <div class="switch-panel" id="section-full" data-switch-panel="section">
+          <div class="window-cta reveal"><div><b>Full Form</b><span>Use the expanded form to enable dragging and control the section scale.</span></div></div>
+          <div class="code-card reveal"><div class="code-head"><span>Full Form Section</span><button class="copy-btn" data-target="sectionFullFormCode" aria-label="Copy full form section code" title="Copy full form section code"></button></div><pre id="sectionFullFormCode"><code>local Section = tab:CreateSection({
+    Title = "Aiming",
+    Icon = 93364949241311,
+    Draggable = true,
+    Scale = "0.70",
+})</code></pre></div>
+          <div class="api-card reveal">
+            <div class="api-title"><code>CreateSection options</code><span class="badge">FULL</span></div>
+            <div class="prop-grid" id="sectionOptionsGrid">
+              <div><code>Title</code><span>Section heading text in DarkyX. DarkyZ uses its own documented Title-style API.</span></div>
+              <div><code>Icon</code><span>Section icon value for DarkyX.</span></div>
+              <div><code>Draggable</code><span>Enables dragging for the section when supported by the library.</span></div>
+              <div><code>Scale</code><span>Sets the section scale, for example "0.70".</span></div>
+            </div>
+          </div>
+        </div>
+        <div class="callout reveal"><strong>Basic and Full Form stay on this page.</strong><span>Use the topbar switcher to move between section examples; each code block has its own copy icon.</span></div>
       </section>
 
       <section class="section" id="groups">
@@ -303,32 +342,32 @@
 
       <section class="section" id="button">
         <div class="element-doc reveal"><div class="element-top"><span class="control-chip">BUTTON</span><code>tab:CreateButton({...})</code></div><p>Use a button for one-shot actions. The callback runs when the user activates it.</p><div class="code-card inline"><div class="usage-bar"><span>Usage</span><button class="copy-btn" data-target="buttonUsageCode">Copy usage</button></div><pre id="buttonUsageCode"><code>tab:CreateButton({
-    name = "Reset character",
-    description = "Reset your current Roblox character.",
-    callback = function()
+    Title = "Reset character",
+    Description = "Reset your current Roblox character.",
+    Callback = function()
         game.Players.LocalPlayer.Character:BreakJoints()
     end,
 })</code></pre></div></div>
       </section>
 
       <section class="section" id="toggle">
-        <div class="element-doc reveal"><div class="element-top"><span class="control-chip">TOGGLE</span><code>tab:CreateToggle({...})</code></div><p>A boolean control for enabling or disabling a module. Use a <code>flag</code> for a stable setting name.</p><div class="code-card inline"><div class="usage-bar"><span>Usage</span><button class="copy-btn" data-target="toggleUsageCode">Copy usage</button></div><pre id="toggleUsageCode"><code>tab:CreateToggle({
-    name = "Auto Sprint",
-    flag = "AutoSprint",
-    value = false,
-    callback = function(value)
+        <div class="element-doc reveal"><div class="element-top"><span class="control-chip">TOGGLE</span><code>tab:CreateToggle({...})</code></div><p>A boolean control for enabling or disabling a module. Use a <code>Flag</code> for a stable setting name.</p><div class="code-card inline"><div class="usage-bar"><span>Usage</span><button class="copy-btn" data-target="toggleUsageCode">Copy usage</button></div><pre id="toggleUsageCode"><code>tab:CreateToggle({
+    Title = "Auto Sprint",
+    Flag = "AutoSprint",
+    Value = false,
+    Callback = function(value)
         print("Auto Sprint:", value)
     end,
 })</code></pre></div></div>
       </section>
 
       <section class="section" id="dropdown">
-        <div class="element-doc reveal"><div class="element-top"><span class="control-chip">DROPDOWN</span><code>tab:CreateDropdown({...})</code></div><p>Present one or multiple choices. <code>multiSelect = true</code> enables multiple active values, and the created dropdown can be refreshed later.</p><div class="code-card inline"><div class="usage-bar"><span>Usage</span><button class="copy-btn" data-target="dropdownUsageCode">Copy usage</button></div><pre id="dropdownUsageCode"><code>local Dropdown = tab:CreateDropdown({
-    name = "Modules",
-    multiSelect = true,
-    options = {"Aimbot", "ESP", "Fly", "Noclip"},
-    value = {"ESP"},
-    callback = function(selected)
+        <div class="element-doc reveal"><div class="element-top"><span class="control-chip">DROPDOWN</span><code>tab:CreateDropdown({...})</code></div><p>Present one or multiple choices. <code>MultiSelect = true</code> enables multiple active values, and the created dropdown can be refreshed later.</p><div class="code-card inline"><div class="usage-bar"><span>Usage</span><button class="copy-btn" data-target="dropdownUsageCode">Copy usage</button></div><pre id="dropdownUsageCode"><code>local Dropdown = tab:CreateDropdown({
+    Title = "Modules",
+    MultiSelect = true,
+    Options = {"Aimbot", "ESP", "Fly", "Noclip"},
+    Value = {"ESP"},
+    Callback = function(selected)
         print(selected)
     end,
 })
@@ -338,27 +377,115 @@ Dropdown:Refresh({"Jump Boost", "Speed Boost"})</code></pre></div></div>
 
       <section class="section" id="slider">
         <div class="element-doc reveal"><div class="element-top"><span class="control-chip">SLIDER</span><code>tab:CreateSlider({...})</code></div><p>Use a numeric slider with a minimum/maximum range, step size, starting value, and optional suffix.</p><div class="code-card inline"><div class="usage-bar"><span>Usage</span><button class="copy-btn" data-target="sliderUsageCode">Copy usage</button></div><pre id="sliderUsageCode"><code>tab:CreateSlider({
-    name = "Field of view",
-    range = {70, 120},
-    increment = 1,
-    value = 90,
-    suffix = "°",
-    callback = function(value)
+    Title = "Field of view",
+    Range = {70, 120},
+    Increment = 1,
+    Value = 90,
+    Suffix = "°",
+    Callback = function(value)
         workspace.CurrentCamera.FieldOfView = value
     end,
 })</code></pre></div></div>
       </section>
 
       <section class="section" id="input">
-        <div class="element-doc reveal"><div class="element-top"><span class="control-chip">INPUT</span><code>tab:CreateInput({...})</code></div><p>Collect text from the user. Set <code>numeric = true</code> when the field should accept numbers only.</p><div class="code-card inline"><div class="usage-bar"><span>Usage</span><button class="copy-btn" data-target="inputUsageCode">Copy usage</button></div><pre id="inputUsageCode"><code>tab:CreateInput({
-    name = "Max players",
-    numeric = true,
-    value = "16",
-    placeholder = "Enter a number",
-    callback = function(text)
+        <div class="element-doc reveal"><div class="element-top"><span class="control-chip">INPUT</span><code>tab:CreateInput({...})</code></div><p>Collect text from the user. Set <code>Numeric = true</code> when the field should accept numbers only.</p><div class="code-card inline"><div class="usage-bar"><span>Usage</span><button class="copy-btn" data-target="inputUsageCode">Copy usage</button></div><pre id="inputUsageCode"><code>tab:CreateInput({
+    Title = "Max players",
+    Numeric = true,
+    Value = "16",
+    Placeholder = "Enter a number",
+    Callback = function(text)
         print("Committed:", text)
     end,
 })</code></pre></div></div>
+      </section>
+
+      <section class="section darkyx-only-page" id="elements-v2">
+        <div class="section-heading reveal"><span class="section-number">08</span><div><h2>Elements V2</h2><p>DarkyX V2 alternatives for selected elements. Each usage is separate, with the new <code>Enabled</code> option and the same instant copy-icon interaction.</p></div></div>
+        <div class="callout reveal"><strong>Use the V2 methods when needed.</strong><span>These are additional methods—<code>CreateButtonV2</code>, <code>CreateToggleV2</code>, <code>CreateSectionV2</code>, <code>CreateSliderV2</code>, and <code>CreateInputV2</code>. The existing non-V2 methods remain documented on their own pages.</span></div>
+
+        <article class="element-doc reveal">
+          <div class="element-top"><span class="control-chip">BUTTON V2</span><code>tab:CreateButtonV2({...})</code></div>
+          <p>A V2 button with a title, description, enabled state, and callback.</p>
+          <div class="code-card inline"><div class="usage-bar"><span>Usage</span><button class="copy-btn" data-target="buttonV2Code" aria-label="Copy Button V2 usage" title="Copy Button V2 usage"></button></div><pre id="buttonV2Code"><code>tab:CreateButtonV2({
+    Title = "Reset character",
+    Description = "Reset your current Roblox character.",
+    Enabled = true,
+    Callback = function()
+        game.Players.LocalPlayer.Character:BreakJoints()
+    end,
+})</code></pre></div>
+        </article>
+
+        <article class="element-doc reveal">
+          <div class="element-top"><span class="control-chip">TOGGLE V2</span><code>tab:CreateToggleV2({...})</code></div>
+          <p>A V2 toggle with a flag, starting value, enabled state, and value callback.</p>
+          <div class="code-card inline"><div class="usage-bar"><span>Usage</span><button class="copy-btn" data-target="toggleV2Code" aria-label="Copy Toggle V2 usage" title="Copy Toggle V2 usage"></button></div><pre id="toggleV2Code"><code>tab:CreateToggleV2({
+    Title = "Auto Sprint",
+    Flag = "AutoSprint",
+    Value = false,
+    Enabled = true,
+    Callback = function(value)
+        print("Auto Sprint:", value)
+    end,
+})</code></pre></div>
+        </article>
+
+        <article class="element-doc reveal">
+          <div class="element-top"><span class="control-chip">SECTION V2</span><code>tab:CreateSectionV2({...})</code></div>
+          <p>A V2 section with an icon, enabled state, and scale setting.</p>
+          <div class="code-card inline"><div class="usage-bar"><span>Usage</span><button class="copy-btn" data-target="sectionV2Code" aria-label="Copy Section V2 usage" title="Copy Section V2 usage"></button></div><pre id="sectionV2Code"><code>local Section = tab:CreateSectionV2({
+    Title = "Aiming",
+    Icon = 93364949241311,
+    Enabled = true,
+    Scale = "0.70",
+})</code></pre></div>
+        </article>
+
+        <article class="element-doc reveal">
+          <div class="element-top"><span class="control-chip">SLIDER V2</span><code>tab:CreateSliderV2({...})</code></div>
+          <p>A V2 numeric slider with a range, increment, suffix, enabled state, and value callback.</p>
+          <div class="code-card inline"><div class="usage-bar"><span>Usage</span><button class="copy-btn" data-target="sliderV2Code" aria-label="Copy Slider V2 usage" title="Copy Slider V2 usage"></button></div><pre id="sliderV2Code"><code>tab:CreateSliderV2({
+    Title = "Field of view",
+    Range = {70, 120},
+    Increment = 1,
+    Value = 90,
+    Suffix = "°",
+    Enabled = true,
+    Callback = function(value)
+        workspace.CurrentCamera.FieldOfView = value
+    end,
+})</code></pre></div>
+        </article>
+
+        <article class="element-doc reveal">
+          <div class="element-top"><span class="control-chip">INPUT V2</span><code>tab:CreateInputV2({...})</code></div>
+          <p>A V2 input with numeric validation, placeholder text, enabled state, and a committed-text callback.</p>
+          <div class="code-card inline"><div class="usage-bar"><span>Usage</span><button class="copy-btn" data-target="inputV2Code" aria-label="Copy Input V2 usage" title="Copy Input V2 usage"></button></div><pre id="inputV2Code"><code>tab:CreateInputV2({
+    Title = "Max players",
+    Numeric = true,
+    Value = "16",
+    Placeholder = "Enter a number",
+    Enabled = true,
+    Callback = function(text)
+        print("Committed:", text)
+    end,
+})</code></pre></div>
+        </article>
+
+        <div class="api-card reveal">
+          <div class="api-title"><code>Elements V2 configuration</code><span class="badge">V2</span></div>
+          <div class="prop-grid">
+            <div><code>Title</code><span>Element title text.</span></div>
+            <div><code>Description</code><span>Additional explanatory text for Button V2.</span></div>
+            <div><code>Enabled</code><span>Enables the element in its V2 configuration.</span></div>
+            <div><code>Callback</code><span>Function called when the supported interaction occurs.</span></div>
+            <div><code>Flag / Value</code><span>Toggle setting identifier and initial state.</span></div>
+            <div><code>Range / Increment / Suffix</code><span>Slider bounds, step size, and display suffix.</span></div>
+            <div><code>Numeric / Placeholder</code><span>Input validation mode and hint text.</span></div>
+            <div><code>Icon / Scale</code><span>Section icon and UI scale.</span></div>
+          </div>
+        </div>
       </section>
 
       <section class="section" id="note">
@@ -382,9 +509,9 @@ Dropdown:Refresh({"Jump Boost", "Speed Boost"})</code></pre></div></div>
           <div class="code-card inline">
             <div class="usage-bar"><span>Create</span><button class="copy-btn" data-target="statCreateCode" aria-label="Copy stat create code" title="Copy stat create code"></button></div>
             <pre id="statCreateCode"><code>local revenue = tab:CreateStat({
-    name = "Revenue",
-    prefix = "$",
-    value = 12400,
+    Title = "Revenue",
+    Prefix = "$",
+    Value = 12400,
 })</code></pre>
           </div>
           <div class="code-card inline">
@@ -396,9 +523,9 @@ Dropdown:Refresh({"Jump Boost", "Speed Boost"})</code></pre></div></div>
 
       <section class="section" id="color-picker">
         <div class="element-doc reveal"><div class="element-top"><span class="control-chip">COLOR PICKER</span><code>tab:CreateColorPicker({...})</code></div><p>Let the user choose a color. The callback receives the selected color and alpha value.</p><div class="code-card inline"><div class="usage-bar"><span>Usage</span><button class="copy-btn" data-target="color-pickerUsageCode">Copy usage</button></div><pre id="color-pickerUsageCode"><code>tab:CreateColorPicker({
-    name = "Highlight",
-    color = Color3.fromRGB(96, 205, 255),
-    callback = function(color, alpha)
+    Title = "Highlight",
+    Color = Color3.fromRGB(96, 205, 255),
+    Callback = function(color, alpha)
         print(color, alpha)
     end,
 })</code></pre></div></div>
@@ -411,24 +538,24 @@ Dropdown:Refresh({"Jump Boost", "Speed Boost"})</code></pre></div></div>
           <div class="code-card inline">
             <div class="usage-bar"><span>Usage</span><button class="copy-btn" data-target="popupUsageCode" aria-label="Copy popup usage" title="Copy popup usage"></button></div>
             <pre id="popupUsageCode"><code>window:Popup({
-    title = "Reset everything?",
-    content = "This clears every saved value. You can't undo it.",
-    options = {
+    Title = "Reset everything?",
+    Content = "This clears every saved value. You can't undo it.",
+    Options = {
         { FirstText = "Cancel" },
         { SecondText = "Reset", Color = Color3.fromRGB(255, 160, 16),
-          callback = function() end },
+          Callback = function() end },
     },
 })</code></pre>
           </div>
           <div class="api-card reveal">
             <div class="api-title"><code>Popup options</code><span class="badge">DIALOG</span></div>
             <div class="prop-grid">
-              <div><code>title</code><span>Popup heading shown at the top.</span></div>
-              <div><code>content</code><span>Explanation or warning text shown below the title.</span></div>
+              <div><code>Title</code><span>Popup heading shown at the top.</span></div>
+              <div><code>Content</code><span>Explanation or warning text shown below the title.</span></div>
               <div><code>FirstText</code><span>Text for the first action, commonly Cancel.</span></div>
               <div><code>SecondText</code><span>Text for the primary action, commonly Confirm or Reset.</span></div>
               <div><code>Color</code><span>Optional color for the second action.</span></div>
-              <div><code>callback</code><span>Runs when the second action is selected.</span></div>
+              <div><code>Callback</code><span>Runs when the second action is selected.</span></div>
             </div>
           </div>
         </div>
@@ -438,7 +565,7 @@ Dropdown:Refresh({"Jump Boost", "Speed Boost"})</code></pre></div></div>
         <div class="section-heading reveal"><span class="section-number">09</span><div><h2>Notifications</h2><p>Use the topbar switcher to choose between a basic notification and the callback-enabled Full Form.</p></div></div>
         <div class="window-top-tabs reveal" role="tablist" aria-label="Notification usage variants">
           <button class="window-top-tab active" type="button" data-switch-group="notify" data-switch-target="notify-basic" role="tab" aria-selected="true">Basic</button>
-          <button class="window-top-tab" type="button" data-switch-group="notify" data-switch-target="notify-full" role="tab" aria-selected="false">Full Form</button>
+          <button id="notify-full-tab" class="window-top-tab" type="button" data-switch-group="notify" data-switch-target="notify-full" role="tab" aria-selected="false">Full Form</button>
         </div>
         <div class="switch-panel active" data-switch-panel="notify" id="notify-basic">
           <div class="window-cta reveal"><div><b>Basic Notify</b><span>Use the essential fields for a simple message. This basic form does not include a Callback.</span></div></div>
@@ -506,6 +633,11 @@ Dropdown:Refresh({"Jump Boost", "Speed Boost"})</code></pre></div></div>
               <tr><td><code>Dropdown:Refresh</code></td><td>Replace dropdown options.</td><td>Updated options</td></tr>
               <tr><td><code>CreateSlider</code></td><td>Choose a numeric value.</td><td>callback(value)</td></tr>
               <tr><td><code>CreateInput</code></td><td>Commit text/numeric input.</td><td>callback(text)</td></tr>
+              <tr class="darkyx-only"><td><code>CreateButtonV2</code></td><td>V2 button with description and enabled state.</td><td>Callback()</td></tr>
+              <tr class="darkyx-only"><td><code>CreateToggleV2</code></td><td>V2 toggle with enabled state.</td><td>Callback(value)</td></tr>
+              <tr class="darkyx-only"><td><code>CreateSectionV2</code></td><td>Create a V2 section with scale.</td><td>Section object</td></tr>
+              <tr class="darkyx-only"><td><code>CreateSliderV2</code></td><td>V2 numeric slider.</td><td>Callback(value)</td></tr>
+              <tr class="darkyx-only"><td><code>CreateInputV2</code></td><td>V2 text or numeric input.</td><td>Callback(text)</td></tr>
               <tr><td><code>CreateNote</code></td><td>Add an informational note to a tab.</td><td>Note element</td></tr>
               <tr><td><code>CreateStat</code></td><td>Display and update a stat.</td><td>Stat object</td></tr>
               <tr><td><code>Stat:Set</code></td><td>Change the stat value.</td><td>Updated value</td></tr>
@@ -536,31 +668,31 @@ Dropdown:Refresh({"Jump Boost", "Speed Boost"})</code></pre></div></div>
 
 local window = DarkyX:CreateWindow({
     Title = "DarkyX Hub",
-    subtitle = "DarkyX",
+    Subtitle = "DarkyX",
     Image = "house",
-    sidebarLayout = false,
+    SidebarLayout = false,
     Effect = true,
-    theme = "Default",
+    Theme = "Default",
 })
 
 local tag = window:CreateTag({
-    text = "us-en",
-    color = Color3.fromRGB(255, 175, 15),
+    Text = "us-en",
+    Color = Color3.fromRGB(255, 175, 15),
 })
 
 tag:Set({
-    text = "live",
-    color = Color3.fromRGB(80, 200, 120),
+    Text = "live",
+    Color = Color3.fromRGB(80, 200, 120),
 })
 
 local tab = window:CreateTab({
-    name = "Combat",
-    icon = 93364949241311,
+    Title = "Combat",
+    Icon = 93364949241311,
 })
 
 local Section = tab:CreateSection({
-    name = "Aiming",
-    icon = 93364949241311,
+    Title = "Aiming",
+    Icon = 93364949241311,
 })
 
 tab:CreateNote({
@@ -569,35 +701,35 @@ tab:CreateNote({
 })
 
 tab:CreateButton({
-    name = "Reset character",
-    description = "Reset your current Roblox character.",
-    callback = function()
+    Title = "Reset character",
+    Description = "Reset your current Roblox character.",
+    Callback = function()
         game.Players.LocalPlayer.Character:BreakJoints()
     end,
 })
 
 tab:CreateToggle({
-    name = "Auto Sprint",
-    flag = "AutoSprint",
-    value = false,
-    callback = function(value)
+    Title = "Auto Sprint",
+    Flag = "AutoSprint",
+    Value = false,
+    Callback = function(value)
         print("Auto Sprint:", value)
     end,
 })
 
 local Dropdown = tab:CreateDropdown({
-    name = "Modules",
-    multiSelect = true,
-    options = {
+    Title = "Modules",
+    MultiSelect = true,
+    Options = {
         "Aimbot",
         "ESP",
         "Fly",
         "Noclip",
     },
-    value = {
+    Value = {
         "ESP",
     },
-    callback = function(selected)
+    Callback = function(selected)
         print(selected)
     end,
 })
@@ -608,57 +740,107 @@ Dropdown:Refresh({
 })
 
 tab:CreateSlider({
-    name = "Field of view",
-    range = {70, 120},
-    increment = 1,
-    value = 90,
-    suffix = "°",
-    callback = function(value)
+    Title = "Field of view",
+    Range = {70, 120},
+    Increment = 1,
+    Value = 90,
+    Suffix = "°",
+    Callback = function(value)
         workspace.CurrentCamera.FieldOfView = value
     end,
 })
 
 tab:CreateInput({
-    name = "Max players",
-    numeric = true,
-    value = "16",
-    placeholder = "Enter a number",
-    callback = function(text)
+    Title = "Max players",
+    Numeric = true,
+    Value = "16",
+    Placeholder = "Enter a number",
+    Callback = function(text)
+        print("Committed:", text)
+    end,
+})
+
+-- Elements V2 usage examples
+tab:CreateButtonV2({
+    Title = "Reset character",
+    Description = "Reset your current Roblox character.",
+    Enabled = true,
+    Callback = function()
+        game.Players.LocalPlayer.Character:BreakJoints()
+    end,
+})
+
+tab:CreateToggleV2({
+    Title = "Auto Sprint",
+    Flag = "AutoSprint",
+    Value = false,
+    Enabled = true,
+    Callback = function(value)
+        print("Auto Sprint:", value)
+    end,
+})
+
+local SectionV2 = tab:CreateSectionV2({
+    Title = "Aiming",
+    Icon = 93364949241311,
+    Enabled = true,
+    Scale = "0.70",
+})
+
+tab:CreateSliderV2({
+    Title = "Field of view",
+    Range = {70, 120},
+    Increment = 1,
+    Value = 90,
+    Suffix = "°",
+    Enabled = true,
+    Callback = function(value)
+        workspace.CurrentCamera.FieldOfView = value
+    end,
+})
+
+tab:CreateInputV2({
+    Title = "Max players",
+    Numeric = true,
+    Value = "16",
+    Placeholder = "Enter a number",
+    Enabled = true,
+    Callback = function(text)
         print("Committed:", text)
     end,
 })
 
 local revenue = tab:CreateStat({
-    name = "Revenue",
-    prefix = "$",
-    value = 12400,
+    Title = "Revenue",
+    Prefix = "$",
+    Value = 12400,
 })
 
-revenue:Set(revenue.value + 500)
+revenue:Set(revenue.Value + 500)
 
 tab:CreateColorPicker({
-    name = "Highlight",
-    color = Color3.fromRGB(96, 205, 255),
-    callback = function(color, alpha)
+    Title = "Highlight",
+    Color = Color3.fromRGB(96, 205, 255),
+    Callback = function(color, alpha)
         print(color, alpha)
     end,
 })
 
 window:Popup({
-    title = "Reset everything?",
-    content = "This clears every saved value. You can't undo it.",
-    options = {
+    Title = "Reset everything?",
+    Content = "This clears every saved value. You can't undo it.",
+    Options = {
         { FirstText = "Cancel" },
         { SecondText = "Reset", Color = Color3.fromRGB(255, 160, 16),
-          callback = function() end },
+          Callback = function() end },
     },
 })
 
 window:Notify({
-    title = "Auto-saved",
-    content = "Your configuration was saved.",
+    Title = "Auto-saved",
+    Content = "Your configuration was saved.",
     Icon = "rbxassetid://0",
-    duration = 5,
+    Duration = 5,
 })</code></pre>
         </div>
       </section>
@@ -940,6 +1122,28 @@ body{
   *,*::before,*::after{scroll-behavior:auto!important;animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
 }
 
+
+/* Three-dot library switcher */
+.more-menu-wrap{position:relative;display:inline-flex;align-items:center}
+.more-menu-trigger{width:36px;padding:0;font-size:25px;line-height:1;letter-spacing:1px}
+.more-menu{position:absolute;z-index:80;top:calc(100% + 10px);right:0;width:230px;padding:15px;border-radius:14px;border:1px solid rgba(160,190,220,.18);background:rgba(10,14,20,.96);box-shadow:0 24px 70px rgba(0,0,0,.5),0 0 34px rgba(40,140,255,.08);backdrop-filter:blur(22px);-webkit-backdrop-filter:blur(22px);animation:menu-in .16s ease-out}
+.more-menu[hidden]{display:none!important}
+.menu-heading{display:block;color:#e4edf7;font-size:11px;font-weight:800;letter-spacing:.04em;margin-bottom:12px}
+.more-menu label{display:block;color:#8d9bab;font-size:10px;margin-bottom:6px}
+.more-menu select{width:100%;height:38px;padding:0 10px;border-radius:9px;border:1px solid rgba(145,175,210,.22);outline:none;background:#101722;color:#ecf5ff;font:600 11px var(--sans);cursor:pointer}
+.more-menu select:focus{border-color:rgba(100,180,255,.6);box-shadow:0 0 0 3px rgba(65,150,255,.10)}
+.more-menu small{display:block;color:#69798b;font-size:9px;line-height:1.5;margin-top:9px}
+@keyframes menu-in{from{opacity:0;transform:translateY(-5px) scale(.98)}to{opacity:1;transform:translateY(0) scale(1)}}
+.library-compat-note{display:flex;gap:10px;align-items:flex-start;margin:14px 0;padding:13px 14px;border:1px solid rgba(126,177,231,.18);border-radius:12px;background:linear-gradient(135deg,rgba(48,103,159,.12),rgba(255,255,255,.02));color:#91a6ba;font-size:11px;line-height:1.65}
+.library-compat-note strong{display:block;color:#d9e9fa;font-size:11px;margin-bottom:2px}
+.library-compat-note .compat-icon{flex:none;display:grid;place-items:center;width:22px;height:22px;border-radius:7px;background:rgba(80,160,255,.12);color:#9dd0ff;font-size:12px}
+.library-unlisted .code-card,.library-unlisted .api-card,.library-unlisted .split-grid,.library-unlisted .element-doc{display:none!important}
+body[data-library="DarkyZ"] .darkyx-only{display:none!important}
+body[data-library="DarkyZ"] .darkyx-only-page{display:none!important}
+body[data-library="DarkyZ"] .api-unlisted{display:none!important}
+body[data-library="DarkyZ"] #notify-full-tab{display:none!important}
+@media(max-width:620px){.more-menu{right:-2px;width:min(250px,calc(100vw - 36px))}.version-pill{display:none}}
+
 </style>
   <script>
 const toast = document.getElementById('toast');
@@ -1049,6 +1253,415 @@ function bindCopyButtons(root = document) {
 }
 bindCopyButtons();
 
+// Library selection in the three-dot menu. DarkyX is the default; DarkyZ swaps
+// the documented snippets to the casing and options shown in its supplied API sample.
+let currentLibrary = 'DarkyX';
+const librarySwitcher = document.getElementById('librarySwitcher');
+const moreMenuToggle = document.getElementById('moreMenuToggle');
+const moreMenu = document.getElementById('moreMenu');
+const originalCodeSnippets = Object.fromEntries(
+  [...document.querySelectorAll('.code-card pre[id]')].map(pre => [pre.id, pre.querySelector('code')?.textContent ?? pre.textContent])
+);
+const darkyZSnippets = {
+  loaderCode: `local DarkyZ = loadstring(game:HttpGet("https://github.com/sokpanha10000-oss/DarkyUI/releases/latest/download/DarkyZ.lua"))()`,
+  keySystemCode: `DarkyZ:CreatekeySystem({
+    Title = "DarkyX Require Access",
+    Note = "get key from link",
+    KeyVaild = {"Key1", "Key2", "key3"},
+    SaveKey = false,
+    MultikeyVaild = true,
+    MultiURL = true,
+    KeyAPI = {URL = {"https://pastebin.com/Gw7Eoi", "https://..."}},
+    Discord = "https://",
+})`,
+  windowUsageCode: `local window = DarkyZ:CreateWindow({
+    Title = "DarkyX Hub",
+    Subtitle = "DarkyX",
+    UIScale = "1.00",
+    Image = "house",
+    Theme = "Default",
+})`,
+  windowFullFormCode: `local window = DarkyZ:CreateWindow({
+    Title = "DarkyX Hub",
+    Subtitle = "DarkyX",
+    UIScale = "1.00",
+    Image = "house", -- Lucide name, numeric asset ID, or rbxassetid:// string
+    Theme = "Default",
+})`,
+  tagCode: `local tag = window:CreateTag({
+    Text = "us-en",
+    Color = Color3.fromRGB(255, 175, 15),
+})`,
+  tagSetCode: `tag:Set({
+    Text = "live",
+    Color = Color3.fromRGB(80, 200, 120),
+})`,
+  tabCode: `local tab = window:CreateTab({ Title = "Combat", Icon = 93364949241311 })
+
+local tab1 = window:CreateTab({ Title = "Combat", Icon = 93364949241311 })`,
+  sectionCode: `tab:CreateSection({
+    Title = "Aiming",
+    Icon = 93364949241311,
+    Opened = true,
+})`,
+  sectionFullFormCode: `local Section = tab:CreateSection({
+    Title = "Aiming",
+    Icon = 93364949241311,
+    Draggable = true,
+    Scale = "0.70",
+})`,
+  buttonUsageCode: `tab:CreateButton({
+    Title = "Reset character",
+    Callback = function()
+        local player = game:GetService("Players").LocalPlayer
+        if player.Character then
+            player.Character:BreakJoints()
+        end
+    end,
+})`,
+  toggleUsageCode: `tab:CreateToggle({
+    Title = "Auto Sprint",
+    Flag = "AutoSprint",
+    Value = false,
+    Callback = function(value)
+        print("Auto Sprint:", value)
+    end,
+})`,
+  dropdownUsageCode: `local Dropdown = tab:CreateDropdown({
+    Title = "Modules",
+    MultiSelect = true,
+    Options = { "Aimbot", "ESP", "Fly", "Noclip" },
+    Value = { "ESP" },
+    Callback = function(selected)
+        print(selected)
+    end,
+})
+
+Dropdown:Refresh({ "Jump Boost", "Speed Boost" })`,
+  sliderUsageCode: `tab:CreateSlider({
+    Title = "Field of view",
+    Range = { 70, 120 },
+    Increment = 1,
+    Value = 90,
+    Suffix = "°",
+    Callback = function(value)
+        workspace.CurrentCamera.FieldOfView = value
+    end,
+})`,
+  inputUsageCode: `tab:CreateInput({
+    Title = "Max players",
+    Numeric = false,
+    Secret = "WowMan",
+    Value = "16",
+    Placeholder = "Enter a number",
+    Callback = function(text)
+        print("Committed:", text)
+    end,
+})`,
+  statCreateCode: `local revenue = tab:CreateStat({ Title = "Revenue", Prefix = "$", Value = 12400 })`,
+  statSetCode: `revenue:Set(revenue.Value + 500)   -- the number rolls up to $12,900 and "+$500" shows briefly`,
+  notifyBasicCode: `window:Notify({
+    Title = "Auto-saved",
+    Content = "Your configuration was saved.",
+    Duration = 5,
+})`,
+  notifyFullCode: `window:Notify({
+    Title = "Auto-saved",
+    Content = "Your configuration was saved.",
+    Duration = 5,
+})`,
+  fullCode: `local DarkyZ = loadstring(game:HttpGet("https://github.com/sokpanha10000-oss/DarkyUI/releases/latest/download/DarkyZ.lua"))()
+
+local window = DarkyZ:CreateWindow({
+    Title = "DarkyX Hub",
+    Subtitle = "DarkyX",
+    UIScale = "1.00",
+    Image = "house",
+    Theme = "Default",
+})
+
+local tab = window:CreateTab({ Title = "Combat", Icon = 93364949241311 })
+local tab1 = window:CreateTab({ Title = "Player", Icon = 93364949241311 })
+
+local Section = tab:CreateSection({
+    Title = "Aiming",
+    Icon = 93364949241311,
+    Draggable = true,
+    Scale = "0.70",
+})
+
+tab:CreateButton({
+    Title = "Reset character",
+    Callback = function()
+        local player = game:GetService("Players").LocalPlayer
+        if player.Character then player.Character:BreakJoints() end
+    end,
+})
+
+tab:CreateToggle({
+    Title = "Auto Sprint",
+    Flag = "AutoSprint",
+    Value = false,
+    Callback = function(value)
+        print("Auto Sprint:", value)
+    end,
+})
+
+local Dropdown = tab:CreateDropdown({
+    Title = "Modules",
+    MultiSelect = true,
+    Options = { "Aimbot", "ESP", "Fly", "Noclip" },
+    Value = { "ESP" },
+    Callback = function(selected)
+        print(selected)
+    end,
+})
+Dropdown:Refresh({ "Jump Boost", "Speed Boost" })
+
+tab:CreateSlider({
+    Title = "Field of view",
+    Range = { 70, 120 },
+    Increment = 1,
+    Value = 90,
+    Suffix = "°",
+    Callback = function(value)
+        workspace.CurrentCamera.FieldOfView = value
+    end,
+})
+
+tab:CreateInput({
+    Title = "Max players",
+    Numeric = false,
+    Secret = "WowMan",
+    Value = "16",
+    Placeholder = "Enter a number",
+    Callback = function(text)
+        print("Committed:", text)
+    end,
+})
+
+DarkyZ:CreatekeySystem({
+    Title = "DarkyX Require Access",
+    Note = "get key from link",
+    KeyVaild = {"Key1", "Key2", "key3"},
+    SaveKey = false,
+    MultikeyVaild = true,
+    MultiURL = true,
+    KeyAPI = {URL = {"https://pastebin.com/Gw7Eoi", "https://..."}},
+    Discord = "https://",
+})
+
+local tag = window:CreateTag({
+    Text = "us-en",
+    Color = Color3.fromRGB(255, 175, 15),
+})
+
+local revenue = tab:CreateStat({ Title = "Revenue", Prefix = "$", Value = 12400 })
+revenue:Set(revenue.Value + 500)
+
+window:Notify({
+    Title = "Auto-saved",
+    Content = "Your configuration was saved.",
+    Duration = 5,
+})`
+};
+
+const libraryUnlistedSections = ['groups', 'note', 'color-picker', 'popup'];
+function setCodeText(id, value) {
+  const code = document.querySelector(`#${CSS.escape(id)} code`);
+  if (code) code.textContent = value;
+}
+function getSectionNotice(sectionId) {
+  const section = document.getElementById(sectionId);
+  if (!section) return;
+  let note = section.querySelector('.library-compat-note');
+  if (!note) {
+    note = document.createElement('div');
+    note.className = 'library-compat-note reveal visible';
+    note.innerHTML = '<span class="compat-icon">i</span><div><strong>Usage not included in the supplied DarkyZ example</strong><span>This does not confirm that the method is unsupported. Switch to DarkyX to view the currently documented example.</span></div>';
+    const heading = section.querySelector('.section-heading');
+    if (heading) heading.insertAdjacentElement('afterend', note);
+    else section.insertBefore(note, section.firstChild);
+  }
+}
+function updateWindowOptionCards(isZ) {
+  const grids = document.querySelectorAll('#window .prop-grid');
+  if (!grids.length) return;
+  const definitions = isZ ? [
+    [['Title','Window title text.'],['Subtitle','Secondary branding text.'],['UIScale','Interface scale setting.'],['Image','Lucide name, numeric asset ID, or rbxassetid:// string.'],['Theme','Selected visual theme.']],
+    [['Title','Window title text.'],['Subtitle','Secondary branding text.'],['UIScale','Interface scale setting.'],['Image','Lucide name, numeric asset ID, or rbxassetid:// string.'],['Theme','Selected visual theme.']]
+  ] : [
+    [['Title','Window title text.'],['Subtitle','Secondary branding text.'],['Image','Window image/icon value.'],['SidebarLayout','Controls the sidebar-style layout.'],['Theme','Base visual theme.']],
+    [['Size','Sets the window dimensions using a Roblox UDim2 offset.'],['UIScale','Controls the interface scale for the window.'],['Animation','Enables the window animation behavior.'],['Effect','Enables the library’s additional visual effects when supported by the current build.'],['Theme','Uses the selected DarkyX theme such as Default.']]
+  ];
+  grids.forEach((grid, i) => {
+    grid.innerHTML = definitions[i].map(([key, desc]) => `<div><code>${key}</code><span>${desc}</span></div>`).join('');
+  });
+  const apiTitle = document.querySelector('#window-full .api-title code');
+  if (apiTitle) apiTitle.textContent = isZ ? 'Full DarkyZ CreateWindow options' : 'Full CreateWindow options';
+}
+function setLibraryMode(mode, persist = true) {
+  currentLibrary = mode === 'DarkyZ' ? 'DarkyZ' : 'DarkyX';
+  const isZ = currentLibrary === 'DarkyZ';
+  document.body.dataset.library = currentLibrary;
+  if (librarySwitcher) librarySwitcher.value = currentLibrary;
+  if (persist) {
+    try { localStorage.setItem('darkyx-docs-library', currentLibrary); } catch {}
+  }
+
+  for (const [id, original] of Object.entries(originalCodeSnippets)) {
+    setCodeText(id, isZ && Object.prototype.hasOwnProperty.call(darkyZSnippets, id) ? darkyZSnippets[id] : original);
+  }
+  document.querySelector('.brand strong')?.replaceChildren(document.createTextNode(currentLibrary));
+  const mark = document.querySelector('.brand-mark');
+  if (mark) mark.textContent = currentLibrary === 'DarkyX' ? 'D' : 'Z';
+  const pill = document.querySelector('.version-pill');
+  if (pill) pill.textContent = `${currentLibrary.toUpperCase()} · API DOCS`;
+  const heroHeading = document.querySelector('.hero h1');
+  if (heroHeading) heroHeading.innerHTML = `Build Roblox interfaces with a <span>${currentLibrary}</span> feel.`;
+  const heroCopy = document.querySelector('.hero-copy');
+  if (heroCopy) heroCopy.textContent = isZ
+    ? 'DarkyZ is the next UI library version in the DarkyUI family. Use this selector to view its Title/Value-style API examples separately from DarkyX.'
+    : 'DarkyX is a compact Roblox UI library built around dark surfaces, focused controls, smooth motion, and a clean API. This documentation gives you the full path from your first window to a complete multi-element hub.';
+  const brandSmall = document.querySelector('.brand small');
+  if (brandSmall) brandSmall.textContent = 'UI Library';
+  const footer = document.querySelector('.sidebar-footer span:last-child');
+  if (footer) footer.textContent = `${currentLibrary} docs · interactive reference`;
+  const installDesc = document.querySelector('#installation .section-heading p');
+  if (installDesc) installDesc.textContent = `Load the latest ${currentLibrary} library first. This is the only required startup line.`;
+  const windowDesc = document.querySelector('#window .section-heading p');
+  if (windowDesc) windowDesc.textContent = isZ
+    ? 'DarkyZ window examples use Title, Subtitle, UIScale, Image, and Theme. Switch between compact and expanded forms.'
+    : 'Single Window and Full Form share one documentation page with an instant topbar switcher.';
+  const fullCodeLabel = document.querySelector('#full-example .code-head span');
+  if (fullCodeLabel) fullCodeLabel.textContent = `${currentLibrary} Hub — complete example`;
+  const fullLoader = document.querySelector('#full-example .section-heading p');
+  if (fullLoader) fullLoader.textContent = `A combined ${currentLibrary} Lua example. Individual usage pages above stay focused.`;
+  const docsTitle = document.querySelector('meta[name="description"]');
+  if (docsTitle) docsTitle.setAttribute('content', `${currentLibrary} UI Library documentation — interactive usage reference.`);
+  document.title = `${currentLibrary} — UI Library Documentation`;
+  updateWindowOptionCards(isZ);
+  const sectionDesc = document.querySelector('#sections .section-heading p');
+  if (sectionDesc) sectionDesc.textContent = isZ
+    ? 'DarkyZ keeps its supplied Section usage, including Opened = true. The Draggable and Scale Full Form is a DarkyX-only update.'
+    : 'Group related controls inside one tab. DarkyX uses Title and Icon; the Full Form adds Draggable and Scale.';
+  const sectionFullTab = document.getElementById('section-full-tab');
+  const sectionFullPanel = document.getElementById('section-full');
+  if (sectionFullTab) {
+    sectionFullTab.hidden = isZ;
+    sectionFullTab.style.display = isZ ? 'none' : '';
+  }
+  if (sectionFullPanel) {
+    sectionFullPanel.hidden = isZ;
+    sectionFullPanel.style.display = isZ ? 'none' : '';
+  }
+  if (isZ) {
+    document.querySelectorAll('[data-switch-group="section"]').forEach(btn => {
+      btn.classList.toggle('active', btn.dataset.switchTarget === 'section-basic');
+      btn.setAttribute('aria-selected', btn.dataset.switchTarget === 'section-basic' ? 'true' : 'false');
+    });
+    document.querySelectorAll('[data-switch-panel="section"]').forEach(panel => {
+      panel.classList.toggle('active', panel.id === 'section-basic');
+      if (panel.id === 'section-basic') panel.style.display = '';
+    });
+  }
+  const sectionOptionsGrid = document.getElementById('sectionOptionsGrid');
+  if (sectionOptionsGrid) sectionOptionsGrid.innerHTML = [
+    ['Title','Section heading text in the DarkyX API.'],
+    ['Icon','Section icon value in the DarkyX API.'],
+    ['Draggable','Allows a section to be dragged when the DarkyX library supports it.'],
+    ['Scale','Sets the section scale, for example "0.70".']
+  ].map(([key, desc]) => `<div><code>${key}</code><span>${desc}</span></div>`).join('');
+
+  // The Platoboost variant is only documented in the DarkyX example supplied so far.
+  const platoTab = document.getElementById('key-platoboost-tab');
+  const platoPanel = document.getElementById('key-platoboost');
+  if (platoTab) platoTab.hidden = isZ;
+  if (platoPanel) platoPanel.hidden = isZ;
+  if (isZ) {
+    document.querySelectorAll('[data-switch-group="keys"]').forEach(btn => {
+      btn.classList.toggle('active', btn.dataset.switchTarget === 'key-standard');
+      btn.setAttribute('aria-selected', btn.dataset.switchTarget === 'key-standard' ? 'true' : 'false');
+    });
+    document.querySelectorAll('[data-switch-panel="keys"]').forEach(panel => panel.classList.toggle('active', panel.id === 'key-standard'));
+  }
+
+  // DarkyZ's supplied example includes a basic Notify only, so its callback form is not shown.
+  const notifyFullTab = document.getElementById('notify-full-tab');
+  const notifyFullPanel = document.getElementById('notify-full');
+  if (notifyFullTab) notifyFullTab.hidden = isZ;
+  if (notifyFullPanel) notifyFullPanel.hidden = isZ;
+  if (isZ) {
+    document.querySelectorAll('[data-switch-group="notify"]').forEach(btn => {
+      btn.classList.toggle('active', btn.dataset.switchTarget === 'notify-basic');
+      btn.setAttribute('aria-selected', btn.dataset.switchTarget === 'notify-basic' ? 'true' : 'false');
+    });
+    document.querySelectorAll('[data-switch-panel="notify"]').forEach(panel => panel.classList.toggle('active', panel.id === 'notify-basic'));
+  }
+
+  libraryUnlistedSections.forEach(id => {
+    const section = document.getElementById(id);
+    if (!section) return;
+    section.classList.toggle('library-unlisted', isZ);
+    if (isZ) getSectionNotice(id);
+  });
+  document.querySelectorAll('.library-compat-note').forEach(note => { note.hidden = !isZ; });
+  const tagUpdateNote = document.getElementById('darkyz-tag-note');
+  if (tagUpdateNote) tagUpdateNote.hidden = !isZ;
+  const darkyZOnlyRows = new Set(['CreateGroup','CreateGroupLeft','CreateGroupRight','CreateNote','CreateColorPicker','Popup','Tag:Set']);
+  document.querySelectorAll('#api tbody tr').forEach(row => {
+    const apiName = row.querySelector('td code')?.textContent.trim();
+    row.classList.toggle('api-unlisted', isZ && darkyZOnlyRows.has(apiName));
+  });
+
+  const keySectionDesc = document.querySelector('#key-system .section-heading p');
+  if (keySectionDesc) keySectionDesc.textContent = isZ
+    ? 'Standard key validation configuration from the supplied DarkyZ usage example.'
+    : 'Use one page for access protection with a topbar switcher for Standard KeySystem or Platoboost.';
+  const notifyDesc = document.querySelector('#notifications .section-heading p');
+  if (notifyDesc) notifyDesc.textContent = isZ
+    ? 'Use the basic notification shape shown in the supplied DarkyZ example.'
+    : 'Use the topbar switcher to choose between a basic notification and the callback-enabled Full Form.';
+  const menuHint = document.getElementById('libraryMenuHint');
+  if (menuHint) menuHint.textContent = isZ ? 'Showing DarkyZ API casing and supplied usage.' : 'Showing DarkyX API casing and documented usage.';
+  document.querySelectorAll('[data-switch-group="window"]').forEach(btn => {
+    btn.classList.toggle('active', btn.dataset.switchTarget === 'window-single');
+    btn.setAttribute('aria-selected', btn.dataset.switchTarget === 'window-single' ? 'true' : 'false');
+  });
+  document.querySelectorAll('[data-switch-panel="window"]').forEach(panel => panel.classList.toggle('active', panel.id === 'window-single'));
+  window.refreshDocsPageNavigation?.();
+  if (isZ && location.hash.slice(1) === 'elements-v2') window.routeDocsTo?.('introduction', true);
+}
+
+moreMenuToggle?.addEventListener('click', event => {
+  event.stopPropagation();
+  const opening = moreMenu.hidden;
+  moreMenu.hidden = !opening;
+  moreMenuToggle.setAttribute('aria-expanded', opening ? 'true' : 'false');
+});
+librarySwitcher?.addEventListener('change', () => {
+  setLibraryMode(librarySwitcher.value);
+  moreMenu.hidden = true;
+  moreMenuToggle?.setAttribute('aria-expanded', 'false');
+  showToast(`${currentLibrary} documentation selected`);
+});
+document.addEventListener('click', event => {
+  if (!event.target.closest('.more-menu-wrap')) {
+    if (moreMenu) moreMenu.hidden = true;
+    moreMenuToggle?.setAttribute('aria-expanded', 'false');
+  }
+});
+document.addEventListener('keydown', event => {
+  if (event.key === 'Escape' && moreMenu && !moreMenu.hidden) {
+    moreMenu.hidden = true;
+    moreMenuToggle?.setAttribute('aria-expanded', 'false');
+    moreMenuToggle?.focus();
+  }
+});
+let savedLibrary = 'DarkyX';
+try { savedLibrary = localStorage.getItem('darkyx-docs-library') || 'DarkyX'; } catch {}
+setLibraryMode(savedLibrary, false);
+
 document.querySelectorAll('[data-copy]').forEach(button => {
   button.addEventListener('click', () => copyText(button.dataset.copy));
 });
@@ -1060,7 +1673,10 @@ const sections = [...document.querySelectorAll('.content > .section[id]')];
 const navLinks = [...document.querySelectorAll('.nav a[data-nav]')];
 const linkMap = new Map(navLinks.map(link => [link.getAttribute('href').slice(1), link]));
 const pageById = new Map(sections.map(section => [section.id, section]));
-const pageIds = sections.map(section => section.id);
+
+function visibleSections() {
+  return sections.filter(section => !(currentLibrary === 'DarkyZ' && section.classList.contains('darkyx-only-page')));
+}
 
 function pageTitle(section) {
   const heading = section?.querySelector('h1,h2')?.textContent?.trim();
@@ -1068,22 +1684,34 @@ function pageTitle(section) {
   return heading || elementLabel || section?.id || 'Page';
 }
 
-function injectPageNavigation() {
-  sections.forEach((section, index) => {
-    if (section.querySelector('.page-nav')) return;
-    if (index === 0 && section.id === 'introduction') {
-      section.insertAdjacentHTML('beforeend', `<div class="page-nav"><a class="page-nav-btn next" href="#${pageIds[index + 1]}" data-route-link><span><span class="nav-small">Next</span><span class="nav-title">${pageTitle(pageById.get(pageIds[index + 1]))}</span></span><span class="nav-arrow">→</span></a></div>`);
+function refreshPageNavigation() {
+  const visible = visibleSections();
+  sections.forEach(section => {
+    let nav = section.querySelector('.page-nav');
+    if (!nav) {
+      nav = document.createElement('div');
+      nav.className = 'page-nav';
+      section.appendChild(nav);
+    }
+    const index = visible.indexOf(section);
+    if (index < 0) {
+      nav.innerHTML = '';
       return;
     }
-    const prevId = pageIds[index - 1];
-    const nextId = pageIds[index + 1];
-    const prevHtml = prevId ? `<a class="page-nav-btn prev" href="#${prevId}" data-route-link><span class="nav-arrow">←</span><span><span class="nav-small">Back</span><span class="nav-title">${pageTitle(pageById.get(prevId))}</span></span></a>` : '<div></div>';
-    const progress = `<div class="page-progress">${String(index + 1).padStart(2,'0')} / ${String(pageIds.length).padStart(2,'0')}</div>`;
-    const nextHtml = nextId ? `<a class="page-nav-btn next" href="#${nextId}" data-route-link><span><span class="nav-small">Next</span><span class="nav-title">${pageTitle(pageById.get(nextId))}</span></span><span class="nav-arrow">→</span></a>` : '<div></div>';
-    section.insertAdjacentHTML('beforeend', `<div class="page-nav">${prevHtml}${progress}${nextHtml}</div>`);
+    const prev = visible[index - 1];
+    const next = visible[index + 1];
+    const prevHtml = prev
+      ? `<a class="page-nav-btn prev" href="#${prev.id}" data-route-link><span class="nav-arrow">←</span><span><span class="nav-small">Back</span><span class="nav-title">${pageTitle(prev)}</span></span></a>`
+      : '<div></div>';
+    const nextHtml = next
+      ? `<a class="page-nav-btn next" href="#${next.id}" data-route-link><span><span class="nav-small">Next</span><span class="nav-title">${pageTitle(next)}</span></span><span class="nav-arrow">→</span></a>`
+      : '<div></div>';
+    const progress = `<div class="page-progress">${String(index + 1).padStart(2,'0')} / ${String(visible.length).padStart(2,'0')}</div>`;
+    nav.innerHTML = `${prevHtml}${progress}${nextHtml}`;
   });
 }
-injectPageNavigation();
+window.refreshDocsPageNavigation = refreshPageNavigation;
+refreshPageNavigation();
 
 document.querySelectorAll('[data-switch-group]').forEach(button => {
   button.addEventListener('click', () => {
@@ -1107,7 +1735,7 @@ function setActiveNav(id) {
 }
 
 function routeTo(id, push = true) {
-  if (!pageById.has(id)) id = 'introduction';
+  if (!pageById.has(id) || (currentLibrary === 'DarkyZ' && pageById.get(id)?.classList.contains('darkyx-only-page'))) id = 'introduction';
   sections.forEach(section => {
     section.classList.toggle('page-active', section.id === id);
     section.classList.toggle('page-hidden', section.id !== id);
@@ -1116,10 +1744,11 @@ function routeTo(id, push = true) {
   closeSidebar();
   window.scrollTo({top:0, behavior:'smooth'});
   if (push) history.pushState({id}, '', `#${id}`);
-  document.title = `${pageTitle(pageById.get(id))} — DarkyX Documentation`;
+  document.title = `${pageTitle(pageById.get(id))} — ${currentLibrary} Documentation`;
   // Re-trigger reveal animations for the newly opened page.
   pageById.get(id)?.querySelectorAll('.reveal').forEach(el => el.classList.add('visible'));
 }
+window.routeDocsTo = routeTo;
 
 document.addEventListener('click', event => {
   const link = event.target.closest('[data-route-link], .nav a[data-nav], .brand[href^="#"]');
