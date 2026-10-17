@@ -240,6 +240,7 @@
     Title = "DarkyX Hub",
     Subtitle = "DarkyX",
     Image = "house",
+    Background = "house",
     SidebarLayout = false,
     Size = UDim2.fromOffset(550, 340),
     UIScale = "0.7",
@@ -1492,7 +1493,7 @@ function updateWindowOptionCards(isZ) {
     [['Title','Window title text.'],['Subtitle','Secondary branding text.'],['UIScale','Interface scale setting.'],['Image','Lucide name, numeric asset ID, or rbxassetid:// string.'],['Theme','Selected visual theme.']]
   ] : [
     [['Title','Window title text.'],['Subtitle','Secondary branding text.'],['Image','Window image/icon value.'],['SidebarLayout','Controls the sidebar-style layout.'],['Theme','Base visual theme.']],
-    [['Size','Sets the window dimensions using a Roblox UDim2 offset.'],['UIScale','Controls the interface scale for the window.'],['Animation','Enables the window animation behavior.'],['Effect','Enables the library’s additional visual effects when supported by the current build.'],['Theme','Uses the selected DarkyX theme such as Default.']]
+    [['Size','Sets the window dimensions using a Roblox UDim2 offset.'],['UIScale','Controls the interface scale for the window.'],['Animation','Enables the window animation behavior.'],['Effect','Enables the library’s additional visual effects when supported by the current build.'],['Background','Sets the window background source, for example "house".'],['Theme','Uses the selected DarkyX theme such as Default.']]
   ];
   grids.forEach((grid, i) => {
     grid.innerHTML = definitions[i].map(([key, desc]) => `<div><code>${key}</code><span>${desc}</span></div>`).join('');
