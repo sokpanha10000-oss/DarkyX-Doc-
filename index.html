@@ -270,10 +270,12 @@
           <div class="code-card reveal"><div class="code-head"><span>Create</span><button class="copy-btn" data-target="tagCode">Copy</button></div><pre id="tagCode"><code>local tag = window:CreateTag({
     Text = "us-en",
     Color = Color3.fromRGB(255, 175, 15),
+    TextColor = Color3.fromRGB(255, 255, 255),
 })</code></pre></div>
           <div class="code-card reveal darkyx-only"><div class="code-head"><span>Update</span><button class="copy-btn" data-target="tagSetCode">Copy</button></div><pre id="tagSetCode"><code>tag:Set({
     Text = "live",
     Color = Color3.fromRGB(80, 200, 120),
+    TextColor = Color3.fromRGB(255, 255, 255),
 })</code></pre></div>
         </div>
         <div class="library-compat-note" id="darkyz-tag-note" hidden><span class="compat-icon">i</span><div><strong>Tag update example</strong><span>The supplied DarkyZ sample shows CreateTag, but does not include a tag update call.</span></div></div>
@@ -363,7 +365,7 @@
       </section>
 
       <section class="section" id="dropdown">
-        <div class="element-doc reveal"><div class="element-top"><span class="control-chip">DROPDOWN</span><code>tab:CreateDropdown({...})</code></div><p>Present one or multiple choices. <code>MultiSelect = true</code> enables multiple active values, and the created dropdown can be refreshed later.</p><div class="code-card inline"><div class="usage-bar"><span>Usage</span><button class="copy-btn" data-target="dropdownUsageCode">Copy usage</button></div><pre id="dropdownUsageCode"><code>local Dropdown = tab:CreateDropdown({
+        <div class="element-doc reveal"><div class="element-top"><span class="control-chip">DROPDOWN</span><code>tab:CreateDropdown({...})</code></div><p>Present one or multiple choices. <code>MultiSelect = true</code> enables multiple active values. Dropdown list actions are documented in their own code boxes below.</p><div class="code-card inline"><div class="usage-bar"><span>Create Dropdown</span><button class="copy-btn" data-target="dropdownUsageCode" aria-label="Copy dropdown creation code" title="Copy dropdown creation code"></button></div><pre id="dropdownUsageCode"><code>local Dropdown = tab:CreateDropdown({
     Title = "Modules",
     MultiSelect = true,
     Options = {"Aimbot", "ESP", "Fly", "Noclip"},
@@ -371,9 +373,13 @@
     Callback = function(selected)
         print(selected)
     end,
-})
+})</code></pre></div></div>
 
-Dropdown:Refresh({"Jump Boost", "Speed Boost"})</code></pre></div></div>
+        <div class="split-grid dropdown-method-grid">
+          <div class="code-card reveal darkyx-only"><div class="code-head"><span>Dropdown:Download</span><button class="copy-btn" data-target="dropdownDownloadCode" aria-label="Copy Dropdown Download code" title="Copy Dropdown Download code"></button></div><pre id="dropdownDownloadCode"><code>Dropdown:Download({ "Fly", "Boost", })</code></pre></div>
+          <div class="code-card reveal darkyx-only"><div class="code-head"><span>Dropdown:ReDownload</span><button class="copy-btn" data-target="dropdownReDownloadCode" aria-label="Copy Dropdown ReDownload code" title="Copy Dropdown ReDownload code"></button></div><pre id="dropdownReDownloadCode"><code>Dropdown:ReDownload({ "Run", "Jump", })</code></pre></div>
+          <div class="code-card reveal"><div class="code-head"><span>Dropdown:Refresh</span><button class="copy-btn" data-target="dropdownRefreshCode" aria-label="Copy Dropdown Refresh code" title="Copy Dropdown Refresh code"></button></div><pre id="dropdownRefreshCode"><code>Dropdown:Refresh({ "Jump boost", "Noclip", })</code></pre></div>
+        </div>
       </section>
 
       <section class="section" id="slider">
@@ -631,7 +637,9 @@ Dropdown:Refresh({"Jump Boost", "Speed Boost"})</code></pre></div></div>
               <tr><td><code>CreateButton</code></td><td>Run an action.</td><td>callback()</td></tr>
               <tr><td><code>CreateToggle</code></td><td>Store a boolean state.</td><td>callback(value)</td></tr>
               <tr><td><code>CreateDropdown</code></td><td>Choose one or more options.</td><td>callback(selected)</td></tr>
-              <tr><td><code>Dropdown:Refresh</code></td><td>Replace dropdown options.</td><td>Updated options</td></tr>
+              <tr class="darkyx-only"><td><code>Dropdown:Download</code></td><td>Use the Download dropdown-list action.</td><td>Dropdown object</td></tr>
+              <tr class="darkyx-only"><td><code>Dropdown:ReDownload</code></td><td>Use the ReDownload dropdown-list action.</td><td>Dropdown object</td></tr>
+              <tr><td><code>Dropdown:Refresh</code></td><td>Refresh the dropdown options with a new list.</td><td>Updated options</td></tr>
               <tr><td><code>CreateSlider</code></td><td>Choose a numeric value.</td><td>callback(value)</td></tr>
               <tr><td><code>CreateInput</code></td><td>Commit text/numeric input.</td><td>callback(text)</td></tr>
               <tr class="darkyx-only"><td><code>CreateButtonV2</code></td><td>V2 button with description and enabled state.</td><td>Callback()</td></tr>
@@ -679,11 +687,13 @@ local window = DarkyX:CreateWindow({
 local tag = window:CreateTag({
     Text = "us-en",
     Color = Color3.fromRGB(255, 175, 15),
+    TextColor = Color3.fromRGB(255, 255, 255),
 })
 
 tag:Set({
     Text = "live",
     Color = Color3.fromRGB(80, 200, 120),
+    TextColor = Color3.fromRGB(255, 255, 255),
 })
 
 local tab = window:CreateTab({
@@ -735,10 +745,9 @@ local Dropdown = tab:CreateDropdown({
     end,
 })
 
-Dropdown:Refresh({
-    "Jump Boost",
-    "Speed Boost",
-})
+Dropdown:Download({ "Fly", "Boost", })
+Dropdown:ReDownload({ "Run", "Jump", })
+Dropdown:Refresh({ "Jump boost", "Noclip", })
 
 tab:CreateSlider({
     Title = "Field of view",
@@ -895,7 +904,7 @@ button{color:inherit}
 .section-heading{display:flex;gap:14px;align-items:flex-start;margin-bottom:20px}.section-number{font-family:var(--mono);color:#505965;font-size:10px;margin-top:7px}.section-heading h2{margin:0;font-size:28px;letter-spacing:-.03em}.section-heading p{margin:5px 0 0;color:#727c87;font-size:12px}
 .code-card{overflow:hidden;border:1px solid var(--line);background:#090b0e;border-radius:14px;box-shadow:0 15px 50px rgba(0,0,0,.23);margin-top:12px}.code-card.large-code pre{max-height:750px}.code-head{height:38px;display:flex;align-items:center;justify-content:space-between;padding:0 12px;border-bottom:1px solid var(--line);background:linear-gradient(180deg,#101419,#0b0e12);color:#8e97a2;font-size:10px}.copy-btn{width:28px;height:28px;padding:0;border:1px solid var(--line);border-radius:8px;background:rgba(255,255,255,.025);color:#a9b1bb;display:inline-grid;place-items:center;cursor:pointer;transition:transform .16s ease,background .16s ease,border-color .16s ease,color .16s ease,box-shadow .16s ease}.copy-btn:hover{background:rgba(255,255,255,.08);color:#fff;transform:translateY(-1px);border-color:rgba(255,255,255,.14)}.copy-btn:active{transform:scale(.92)}.copy-btn svg{width:15px;height:15px;display:block}.copy-btn.copied{color:#7ff0aa;background:rgba(76,210,132,.10);border-color:rgba(76,210,132,.28);box-shadow:0 0 18px rgba(76,210,132,.14)}.copy-btn.copied svg{animation:copy-check .22s ease-out}.code-card pre{margin:0;padding:18px 18px 20px;overflow:auto;font-family:var(--mono);font-size:11px;line-height:1.75;color:#cdd4dc;white-space:pre}.callout{display:flex;gap:10px;padding:14px 15px;border-left:2px solid #87909a;background:rgba(255,255,255,.025);margin-top:14px;border-radius:0 12px 12px 0;color:#747f8b;font-size:11px}.callout strong{color:#d9dee3;white-space:nowrap}
 .api-card,.element-doc{border:1px solid var(--line);background:linear-gradient(180deg,rgba(17,21,26,.72),rgba(9,11,14,.75));border-radius:15px;padding:18px}.api-title{display:flex;justify-content:space-between;align-items:center;padding-bottom:15px;border-bottom:1px solid var(--line)}.api-title code,.element-top code{font-family:var(--mono);font-size:12px;color:#e6ebef}.badge,.control-chip{font-size:9px;letter-spacing:.14em;color:#87919c;border:1px solid var(--line);padding:5px 7px;border-radius:7px;background:rgba(255,255,255,.025)}.prop-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 16px}.prop-grid>div{padding:14px 0;border-bottom:1px solid rgba(255,255,255,.05)}.prop-grid code{display:block;font-family:var(--mono);font-size:11px;color:#dfe4e9;margin-bottom:4px}.prop-grid span{font-size:10px;color:#727c87}.prop-grid span code{display:inline;font-size:10px;color:#a9b3bd}
-.split-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}.element-doc p{color:#7d8792;font-size:12px;margin:13px 0}.element-top{display:flex;align-items:center;justify-content:space-between;gap:10px}.code-card.inline{margin-top:13px}
+.split-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}.dropdown-method-grid{margin-top:12px;align-items:start}.dropdown-method-grid .code-card{margin-top:0}.dropdown-method-grid .code-head span{font-family:var(--mono);font-size:10px;color:#91bdf4}.element-doc p{color:#7d8792;font-size:12px;margin:13px 0}.element-top{display:flex;align-items:center;justify-content:space-between;gap:10px}.code-card.inline{margin-top:13px}
 .effect-grid,.info-grid,.notes-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}.effect-card,.info-card,.notes-grid article{min-height:180px;border:1px solid var(--line);border-radius:15px;padding:18px;background:linear-gradient(180deg,rgba(17,21,26,.72),rgba(9,11,14,.75));position:relative;overflow:hidden}.effect-card h3{font-size:13px;margin:46px 0 4px}.effect-card p,.notes-grid p,.info-card span{font-size:11px;color:#707a86;margin:0}.effect-orb{position:absolute;top:-30px;left:-10px;width:95px;height:95px;border-radius:50%;background:radial-gradient(circle,rgba(142,209,255,.34),rgba(142,209,255,0));filter:blur(3px)}.effect-pulse{position:absolute;top:22px;left:20px;width:14px;height:14px;border:1px solid rgba(255,255,255,.5);border-radius:50%;box-shadow:0 0 0 10px rgba(255,255,255,.02),0 0 35px rgba(255,255,255,.15);animation:pulse 2.2s infinite}.effect-line{position:absolute;left:0;right:0;top:38px;height:1px;background:linear-gradient(90deg,transparent,rgba(255,255,255,.3),transparent);animation:scan 3s linear infinite}.info-grid{grid-template-columns:repeat(3,1fr)}.info-card{min-height:90px}.info-card b{display:block;font-size:12px;margin-bottom:6px}.notes-grid{grid-template-columns:repeat(2,1fr)}.notes-grid article{min-height:120px}.notes-grid b{font-size:12px}
 .table-card{overflow:auto;border:1px solid var(--line);border-radius:14px;background:#090b0e}.table-card table{width:100%;border-collapse:collapse;min-width:700px}.table-card th,.table-card td{text-align:left;padding:11px 13px;border-bottom:1px solid rgba(255,255,255,.05);font-size:10px}.table-card th{color:#69737e;text-transform:uppercase;letter-spacing:.12em;font-size:8px;background:#0d1115}.table-card td{color:#808a95}.table-card tr:last-child td{border-bottom:0}.table-card code{font-family:var(--mono);color:#d6dce2}
 .footer{margin:80px 18px 18px;border-radius:16px;padding:18px 20px;display:flex;align-items:center;justify-content:space-between}.footer strong{display:block;font-size:12px}.footer span{display:block;color:#66707c;font-size:10px;margin-top:2px}.footer a{font-size:10px;color:#acb4bd}
@@ -1336,9 +1345,7 @@ local tab1 = window:CreateTab({ Title = "Combat", Icon = 93364949241311 })`,
     Callback = function(selected)
         print(selected)
     end,
-})
-
-Dropdown:Refresh({ "Jump Boost", "Speed Boost" })`,
+})`,
   sliderUsageCode: `tab:CreateSlider({
     Title = "Field of view",
     Range = { 70, 120 },
